@@ -31,8 +31,8 @@ void reg_test() {
 	assert(reg_b(R_DH) == ((sample[R_EDX] >> 8) & 0xff));
 
 	assert(sample[R_EAX] == cpu.eax);
-	Log("%d", sample[R_ECX]);
-	Log("%d", cpu.ecx);
+	Log("%x", sample[R_ECX]);
+	Log("%x", cpu.ecx);
 	assert(sample[R_ECX] == cpu.ecx);
 	assert(sample[R_EDX] == cpu.edx);
 	assert(sample[R_EBX] == cpu.ebx);
