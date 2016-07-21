@@ -23,7 +23,10 @@ static struct rule {
      */
 
     {" +",	NOTYPE},				// spaces
-    {"\\+", '+'},					// plus
+    {"\\+", '+'},					// plus/add
+    {"\\-", '-'},					// minus/subtract
+    {"\\*", '*'},					// times/multiply
+    {"\\/", '/'},					// by/divide
     {"==", EQ}						// equal
 };
 
@@ -83,6 +86,15 @@ static bool make_token(char *e) {
 				break;
 		    case '+':
 				tokens[nr_token++].type= '+';
+				break;
+		    case '-':
+				tokens[nr_token++].type= '-';
+				break;
+		    case '*':
+				tokens[nr_token++].type= '*';
+				break;
+		    case '/':
+				tokens[nr_token++].type= '/';
 				break;
 		    default: panic("please implement me");
 		}
