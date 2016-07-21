@@ -64,8 +64,7 @@ static int cmd_x(char *args) {
     args = num + strlen(num) + 1;
     swaddr_t addr;
     sscanf(args, "%x\n",&addr);
-    printf("%d\n0x%x\n",atoi(num),addr);
-    print_bin_instr(atol(args), atoi(num));
+    print_bin_instr(addr, atoi(num));
     return 0;
 }
 
