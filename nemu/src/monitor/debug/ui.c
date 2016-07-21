@@ -75,9 +75,9 @@ static int cmd_x(char *args) {
     return 0;
 }
 
-static int cmd_expr(char *args) {
+static int cmd_p(char *args) {
     bool success;
-    expr(args, &success);
+    printf("%d\n",expr(args, &success));
 
     return 0;
 }
@@ -93,7 +93,7 @@ static struct {
     { "si", "Step once or more", cmd_si },
     { "info", "Print state of registers or infomation of watchpoints", cmd_info },
     { "x", "Scan instructions in memory", cmd_x },
-    { "expr", "Test expr", cmd_expr },
+    { "p", "Test expr", cmd_p },
 
 
     /* TODO: Add more commands */
