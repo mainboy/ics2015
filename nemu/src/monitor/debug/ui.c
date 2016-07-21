@@ -68,6 +68,7 @@ static int cmd_x(char *args) {
     int len = atoi(num),i;
     for (i=0; i<len; i++){
 	printf("%02x",instr_fetch(addr, 1));
+	addr = addr+1;
     }
     return 0;
 }
