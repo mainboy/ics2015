@@ -145,6 +145,7 @@ bool check_parentheses(int p, int q) {
 	    }
 	    p++;
 	}
+	q--;
 	if (tokens[q].type == ')') {
 	    success = false;
 	    while(p++) {
@@ -155,6 +156,7 @@ bool check_parentheses(int p, int q) {
 	    }
 	    q--;
 	}
+	p++;
     }
     return success;
 }
