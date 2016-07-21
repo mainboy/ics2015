@@ -71,6 +71,7 @@ static int cmd_x(char *args) {
 	printf("%02x ",instr_fetch(addr, 1));
 	addr = addr+1;
     }
+    printf("\n");
     return 0;
 }
 
