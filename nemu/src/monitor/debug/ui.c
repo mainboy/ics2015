@@ -45,7 +45,7 @@ static int cmd_si(char *args) {
 
 static int cmd_info(char *args) {
    if (strcmp(args, "r")==0 || strcmp(args, "reg")==0){
-       printf("eax	0x%x 0x%x 0x%x 0x%x 0x%x\n",cpu.eax, cpu.gpr[0]._32, cpu.gpr[0]._16, cpu.gpr[0]._8[0], cpu.gpr[0]._8[1]);
+       printf("eax	0x%x\n",cpu.eax);
        printf("ecx	0x%x\n",cpu.ecx);
        printf("edx	0x%x\n",cpu.edx);
        printf("ebx	0x%x\n",cpu.ebx);
