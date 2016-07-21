@@ -7,8 +7,9 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
+#include <cpu/helper.h>
+
 void cpu_exec(uint32_t);
-void print_bin_instr(swaddr_t, int);
 
 /* We use the ``readline'' library to provide more flexibility to read from stdin. */
 char* rl_gets() {
@@ -45,18 +46,18 @@ static int cmd_si(char *args) {
 }
 
 static int cmd_info(char *args) {
-   if (strcmp(args, "r")==0 || strcmp(args, "reg")==0){
-       printf("eax	0x%x\n",cpu.eax);
-       printf("ecx	0x%x\n",cpu.ecx);
-       printf("edx	0x%x\n",cpu.edx);
-       printf("ebx	0x%x\n",cpu.ebx);
-       printf("esp	0x%x\n",cpu.esp);
-       printf("ebp	0x%x\n",cpu.ebp);
-       printf("esi	0x%x\n",cpu.esi);
-       printf("edi	0x%x\n",cpu.edi);
-   }
+    if (strcmp(args, "r")==0 || strcmp(args, "reg")==0){
+	printf("eax	0x%x\n",cpu.eax);
+	printf("ecx	0x%x\n",cpu.ecx);
+	printf("edx	0x%x\n",cpu.edx);
+	printf("ebx	0x%x\n",cpu.ebx);
+	printf("esp	0x%x\n",cpu.esp);
+	printf("ebp	0x%x\n",cpu.ebp);
+	printf("esi	0x%x\n",cpu.esi);
+	printf("edi	0x%x\n",cpu.edi);
+    }
 
-   return 0;
+    return 0;
 }
 
 static int cmd_x(char *args) {
@@ -64,7 +65,7 @@ static int cmd_x(char *args) {
     args = num + strlen(num) + 1;
     swaddr_t addr;
     sscanf(args, "%x\n",&addr);
-    print_bin_instr(addr, atoi(num));
+    instr_fetch(addr, atoi(num));
     return 0;
 }
 
