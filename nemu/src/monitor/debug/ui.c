@@ -7,6 +7,8 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
+#include <cpu/helper.h>
+
 void cpu_exec(uint32_t);
 
 /* We use the ``readline'' library to provide more flexibility to read from stdin. */
@@ -63,7 +65,10 @@ static int cmd_x(char *args) {
     args = num + strlen(num) + 1;
     swaddr_t addr;
     sscanf(args, "%x\n",&addr);
-    //instr_fetch(addr, atoi(num));
+    int len = atoi(num),i=0;
+    while(i <len){
+	printf("%02x",instr_fetch(addr, i));
+    }
     return 0;
 }
 
