@@ -8,6 +8,7 @@
 #include <readline/history.h>
 
 void cpu_exec(uint32_t);
+void print_bin_instr(swaddr_t, int);
 
 /* We use the ``readline'' library to provide more flexibility to read from stdin. */
 char* rl_gets() {
@@ -58,6 +59,13 @@ static int cmd_info(char *args) {
    return 0;
 }
 
+static int cmd_x(char *args) {
+    char* num = strtok(args, " ");
+    args = num + strlen(num) + 1;
+    print_bin_instr(atol(args), atoi(num));
+    return 0;
+}
+
 static struct {
     char *name;
     char *description;
@@ -68,6 +76,7 @@ static struct {
     { "q", "Exit NEMU", cmd_q },
     { "si", "Step once or more", cmd_si },
     { "info", "Print state of registers or infomation of watchpoints", cmd_info },
+    { "x", "Scan instructions", cmd_x },
 
 
     /* TODO: Add more commands */
