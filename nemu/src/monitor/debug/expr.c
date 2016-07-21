@@ -102,6 +102,7 @@ uint32_t expr(char *e, bool *success) {
     }
 
     /* TODO: Insert codes to evaluate the expression. */
+    Log("expression has been executed");
     panic("please implement me");
     return 0;
 }
