@@ -7,8 +7,6 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-#include <cpu/helper.h>
-
 void cpu_exec(uint32_t);
 
 /* We use the ``readline'' library to provide more flexibility to read from stdin. */
@@ -65,7 +63,7 @@ static int cmd_x(char *args) {
     args = num + strlen(num) + 1;
     swaddr_t addr;
     sscanf(args, "%x\n",&addr);
-    instr_fetch(addr, atoi(num));
+    //instr_fetch(addr, atoi(num));
     return 0;
 }
 
@@ -79,7 +77,7 @@ static struct {
     { "q", "Exit NEMU", cmd_q },
     { "si", "Step once or more", cmd_si },
     { "info", "Print state of registers or infomation of watchpoints", cmd_info },
-    { "x", "Scan instructions", cmd_x },
+    { "x", "Scan instructions in memory", cmd_x },
 
 
     /* TODO: Add more commands */
