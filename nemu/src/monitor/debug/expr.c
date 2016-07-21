@@ -27,6 +27,8 @@ static struct rule {
     {"\\-", '-'},					// minus/subtract
     {"\\*", '*'},					// times/multiply
     {"\\/", '/'},					// by/divide
+    {"\\(", '('},					// 
+    {"\\)", ')'},					// 
     {"[0-9]+", NUM},					// number
     {"==", EQ}						// equal
 };
@@ -96,6 +98,12 @@ static bool make_token(char *e) {
 				break;
 		    case '/':
 				tokens[nr_token++].type= '/';
+				break;
+		    case '(':
+				tokens[nr_token++].type= '(';
+				break;
+		    case ')':
+				tokens[nr_token++].type= ')';
 				break;
 		    case NUM:
 				tokens[nr_token].type= NUM;
