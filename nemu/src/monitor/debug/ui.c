@@ -39,12 +39,23 @@ static int cmd_q(char *args) {
 static int cmd_help(char *args);
 
 static int cmd_si(char *args) {
-    if (NULL == args){
-	cpu_exec(1);
-    }else {
-	cpu_exec(atoi(args));
-    }
+    cpu_exec(NULL==args?1:atoi(args));
     return 0;
+}
+
+static int cmd_info(char *args) {
+   if (strcmp(args, "r")==0 || strcmp(args, "reg")==0){
+       printf("eax	%x\n",cpu.eax);
+       printf("ecx	%x\n",cpu.ecx);
+       printf("edx	%x\n",cpu.edx);
+       printf("ebx	%x\n",cpu.ebx);
+       printf("esp	%x\n",cpu.esp);
+       printf("ebp	%x\n",cpu.ebp);
+       printf("esi	%x\n",cpu.esi);
+       printf("edi	%x\n",cpu.edi);
+   }
+
+   return 0;
 }
 
 static struct {
@@ -56,6 +67,7 @@ static struct {
     { "c", "Continue the execution of the program", cmd_c },
     { "q", "Exit NEMU", cmd_q },
     { "si", "Step once or more", cmd_si },
+    { "info", "Print state of registers or infomation of watchpoints", cmd_info },
 
 
     /* TODO: Add more commands */
