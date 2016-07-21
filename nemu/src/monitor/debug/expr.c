@@ -86,32 +86,32 @@ static bool make_token(char *e) {
 
 		switch(rules[i].token_type) {
 		    case NOTYPE:
-				break;
+			break;
 		    case '+':
-				tokens[nr_token++].type= '+';
-				break;
+			tokens[nr_token++].type= '+';
+			break;
 		    case '-':
-				tokens[nr_token++].type= '-';
-				break;
+			tokens[nr_token++].type= '-';
+			break;
 		    case '*':
-				tokens[nr_token++].type= '*';
-				break;
+			tokens[nr_token++].type= '*';
+			break;
 		    case '/':
-				tokens[nr_token++].type= '/';
-				break;
+			tokens[nr_token++].type= '/';
+			break;
 		    case '(':
-				tokens[nr_token++].type= '(';
-				break;
+			tokens[nr_token++].type= '(';
+			break;
 		    case ')':
-				tokens[nr_token++].type= ')';
-				break;
+			tokens[nr_token++].type= ')';
+			break;
 		    case NUM:
-				tokens[nr_token].type= NUM;
-				if (substr_len >= 32)
-				    assert(0);
-				strncpy(tokens[nr_token].str, substr_start, substr_len);
-				nr_token++;
-				break;
+			tokens[nr_token].type= NUM;
+			if (substr_len >= 32)
+			    assert(0);
+			strncpy(tokens[nr_token].str, substr_start, substr_len);
+			nr_token++;
+			break;
 		    default: panic("please implement me");
 		}
 
@@ -128,6 +128,105 @@ static bool make_token(char *e) {
     return true; 
 }
 
+bool check_parentheses(int p, int q) {
+    bool success = true;
+    if (tokens[p].type != '(' || tokens[q].type != ')') {
+	return false;
+    }
+    p++,q--;
+    while (p < q) {
+	if (tokens[p].type == '(') {
+	    success = false;
+	    while(q--){
+		if(tokens[q].type == ')') {
+		    success = true;
+		    break;
+		}
+	    }
+	    p++;
+	}
+	if (tokens[q].type == ')') {
+	    success = false;
+	    while(p++) {
+		if (tokens[p].type == '(') {
+		    success = true;
+		    break;
+		}
+	    }
+	    q--;
+	}
+    }
+    return success;
+}
+
+int eval(int p, int q, bool *success) {
+    if (p > q) {
+	Log("Bad expression");
+	*success = false;
+	return 0;
+    } else if (p == q) {
+	if (tokens[p].type != NUM) {
+	    Log("Bad expression");
+	    *success = false;
+	    return 0;
+	}else {
+	    int number;
+	    sscanf(tokens[p].str,"%d",&number);
+	    return number; 
+	}
+    } else if (check_parentheses(p, q)) {
+	return eval(p+1, q-1, success);
+    } else {
+	int op_type=0, cur=0, top=0, i;
+	for(i=p; i<=q; i++) {
+	    if (tokens[i].type == '+' || tokens[i].type == '-') {
+		    op_type = i;
+		    cur = top;
+		    break;
+	    }else if (tokens[i].type == '*' || tokens[i].type == '/') {
+		    op_type = i;
+		    cur = top;
+		    break;
+	    }else if (tokens[i].type == '(') {
+		top++;
+	    }else if (tokens[i].type == ')') {
+		top--;
+	    }
+	}
+	for( ; i<=q; i++) {
+	    if (tokens[i].type == '+' || tokens[i].type == '-') {
+		if (top <= cur) {
+		    op_type = i;
+		    cur = top;
+		}
+	    }else if (tokens[i].type == '*' || tokens[i].type == '/') {
+		if (top <= cur) {
+		    op_type = i;
+		    cur = top;
+		}
+	    }else if (tokens[i].type == '(') {
+		top++;
+	    }else if (tokens[i].type == ')') {
+		top--;
+	    }
+	}
+	int val1 = eval(p, op_type -1, success);
+	if (*success==false) return 0;
+	int val2 = eval(op_type + 1, q, success);
+	if (*success==false) return 0;
+
+	switch(tokens[op_type].type) {
+	    case '+': return val1 + val2;
+	    case '-': return val1 - val2;
+	    case '*': return val1 * val2;
+	    case '/': return val1 / val2;
+	    default : assert(0);
+	}
+
+    }
+
+}
+
 uint32_t expr(char *e, bool *success) {
     if(!make_token(e)) {
 	*success = false;
@@ -135,7 +234,6 @@ uint32_t expr(char *e, bool *success) {
     }
 
     /* TODO: Insert codes to evaluate the expression. */
-    panic("please implement me");
-    return 0;
+    return eval(0, nr_token-1, success);
 }
 
