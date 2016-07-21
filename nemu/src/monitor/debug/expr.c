@@ -102,7 +102,7 @@ static bool make_token(char *e) {
 				if (substr_len >= 32)
 				    assert(0);
 				strncpy(tokens[nr_token].str, substr_start, substr_len);
-				Log("%s\n",tokens[nr_token].str);
+				nr_token++;
 				break;
 		    default: panic("please implement me");
 		}
@@ -127,7 +127,6 @@ uint32_t expr(char *e, bool *success) {
     }
 
     /* TODO: Insert codes to evaluate the expression. */
-    Log("expression has been executed");
     panic("please implement me");
     return 0;
 }
