@@ -65,9 +65,9 @@ static int cmd_x(char *args) {
     args = num + strlen(num) + 1;
     swaddr_t addr;
     sscanf(args, "%x\n",&addr);
-    int len = atoi(num),i=0;
-    while(i <len){
-	printf("%02x",instr_fetch(addr, i));
+    int len = atoi(num),i;
+    for (i=0; i<len; i++){
+	printf("%02x",instr_fetch(addr, 1));
     }
     return 0;
 }
