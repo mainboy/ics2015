@@ -62,7 +62,9 @@ static int cmd_info(char *args) {
 static int cmd_x(char *args) {
     char* num = strtok(args, " ");
     args = num + strlen(num) + 1;
-    printf("%d\n%s\n",atoi(num),args);
+    swaddr_t addr;
+    sscanf(args, "%u\n",&addr);
+    printf("%d\n0x%x\n",atoi(num),addr);
     print_bin_instr(atol(args), atoi(num));
     return 0;
 }
