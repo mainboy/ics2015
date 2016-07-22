@@ -91,7 +91,11 @@ static bool make_token(char *e) {
 			tokens[nr_token++].type= '+';
 			break;
 		    case '-':
-			tokens[nr_token++].type= '-';
+			if (tokens[nr_token-1].type == NUM) {
+			    tokens[nr_token++].type= '-';
+			} else {
+
+			}
 			break;
 		    case '*':
 			tokens[nr_token++].type= '*';
