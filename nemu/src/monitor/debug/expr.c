@@ -150,24 +150,7 @@ bool check_parentheses(int p, int q) {
     return true;
 }
 
-int eval(int p, int q, bool *success) {
-    if (p > q) {
-	Log("Bad expression");
-	*success = false;
-	return 0;
-    } else if (p == q) {
-	if (tokens[p].type != NUM) {
-	    Log("Bad expression");
-	    *success = false;
-	    return 0;
-	}else {
-	    int number;
-	    sscanf(tokens[p].str,"%d",&number);
-	    return number; 
-	}
-    } else if (check_parentheses(p, q)) {
-	return eval(p+1, q-1, success);
-    } else {
+int found_op(int p, int q) {
 	int op_type=0, cur=0, top=0, i;
 	for(i=p; i<=q; i++) {
 	    if (tokens[i].type == '+' || tokens[i].type == '-') {
@@ -201,6 +184,29 @@ int eval(int p, int q, bool *success) {
 		top--;
 	    }
 	}
+
+	return op_type;
+}
+
+int eval(int p, int q, bool *success) {
+    if (p > q) {
+	Log("Bad expression");
+	*success = false;
+	return 0;
+    } else if (p == q) {
+	if (tokens[p].type != NUM) {
+	    Log("Bad expression");
+	    *success = false;
+	    return 0;
+	}else {
+	    int number;
+	    sscanf(tokens[p].str,"%d",&number);
+	    return number; 
+	}
+    } else if (check_parentheses(p, q)) {
+	return eval(p+1, q-1, success);
+    } else {
+	int op_type=found_op(p, q);
 	int val1 = eval(p, op_type -1, success);
 	if (*success==false) return 0;
 	int val2 = eval(op_type + 1, q, success);
