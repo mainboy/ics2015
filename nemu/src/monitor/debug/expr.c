@@ -30,7 +30,7 @@ static struct rule {
     {"\\(", '('},					// 
     {"\\)", ')'},					// 
     {"[0-9]+", NUM},					// number
-    {"-[0-9]+", NEG},					// negative number
+    {"\\-[0-9]+", NEG},					// negative number
     {"==", EQ}						// equal
 };
 
