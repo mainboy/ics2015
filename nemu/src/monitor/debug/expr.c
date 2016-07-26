@@ -161,6 +161,13 @@ static bool make_token(char *e) {
 		    case NO :
 			tokens[nr_token++].type = NO;
 			break;
+		    case REG:
+			tokens[nr_token].type= REG;
+			if (substr_len >= 32)
+			    assert(0);
+			strncpy(tokens[nr_token].str, substr_start, substr_len);
+			nr_token++;
+			break ;
 		    default: panic("please implement me");
 		}
 
