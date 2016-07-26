@@ -77,8 +77,10 @@ static int cmd_x(char *args) {
 
 static int cmd_p(char *args) {
     bool success=true;
-    printf("%d\n",expr(args, &success));
-
+    int val = expr(args, &success);
+    if (success == false)
+	panic("Some errors happened.");
+    printf("%d	    %x\n",val, val);
     return 0;
 }
 
