@@ -80,7 +80,7 @@ static int cmd_p(char *args) {
     int val = expr(args, &success);
     if (success == false)
 	panic("Some errors happened.");
-    printf("%d	    %x\n",val, val);
+    printf("%d	    0x%x\n",val, val);
     return 0;
 }
 
