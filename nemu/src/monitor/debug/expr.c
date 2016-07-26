@@ -199,40 +199,36 @@ bool check_parentheses(int p, int q) {
 }
 
 int found_op(int p, int q) {
-	int op_type=-1, cur=0, top=0, i, flag_NO=-1;
-	for(i=p; i<=q; i++) {
+    int op_type=-1, cur=0, top=0, i;
+    for(i=p; i<=q; i++) {
+	if (top <= cur) {
 	    if (tokens[i].type == OR) {
-		return i;
-	    }
-	    if (tokens[i].type == AND) {
-		return i;
-	    }
-	    if (tokens[i].type == EQ || tokens[i].type == NEQ) {
-		return i;
-	    }
-	    if (tokens[i].type == '+' || tokens[i].type == '-') {
-		if (top <= cur) {
-		    op_type = i;
-		    cur = top;
-		}
-	    }else if (tokens[i].type == '*' || tokens[i].type == '/') {
-		if (top <= cur) {
-		    op_type = i;
-		    cur = top;
-		}
-	    }else if (tokens[i].type == '(') {
+		op_type = i;
+		cur = top;
+	    } else if (tokens[i].type == AND) {
+		op_type = i;
+		cur = top;
+	    } else if (tokens[i].type == EQ || tokens[i].type == NEQ) {
+		op_type = i;
+		cur = top;
+	    } else if (tokens[i].type == '+' || tokens[i].type == '-') {
+		op_type = i;
+		cur = top;
+	    } else if (tokens[i].type == '*' || tokens[i].type == '/') {
+		op_type = i;
+		cur = top;
+	    } else if (tokens[i].type == NO) {
+		op_type = i;
+		cur = top;
+	    } else if (tokens[i].type == '(') {
 		top++;
-	    }else if (tokens[i].type == ')') {
+	    } else if (tokens[i].type == ')') {
 		top--;
 	    }
-	    if (tokens[i].type == NO) {
-		flag_NO = i;
-	    }
 	}
+    }
 
-	if(op_type == -1)
-	    op_type = flag_NO; 
-	return op_type;
+    return op_type;
 }
 
 int eval(int p, int q, bool *success) {
