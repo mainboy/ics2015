@@ -246,13 +246,15 @@ int eval(int p, int q, bool *success) {
 	*success = false;
 	return 0;
     } else if (p == q) {
-	if (tokens[p].type != NUM && tokens[p].type != NEG) {
+	if (tokens[p].type != NUM && tokens[p].type != NEG && tokens[p].type != HEX) {
 	    Log("Bad expression");
 	    *success = false;
 	    return 0;
 	}else {
 	    int number;
 	    sscanf(tokens[p].str,"%d",&number);
+	    if (tokens[p].type == HEX)
+		sscanf(tokens[p].str,"%x",&number);
 	    if (tokens[p].type == NEG)
 		return -number;
 	    return number; 
