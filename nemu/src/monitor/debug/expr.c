@@ -7,7 +7,7 @@
 #include <regex.h>
 
 enum {
-    NOTYPE = 256, EQ, NUM
+    NOTYPE = 256, EQ, NUM, NEG
 
 	/* TODO: Add more token types */
 
@@ -30,6 +30,7 @@ static struct rule {
     {"\\(", '('},					// 
     {"\\)", ')'},					// 
     {"[0-9]+", NUM},					// number
+    {"\\-[0-9]+", NEG},					// negative number
     {"==", EQ}						// equal
 };
 
@@ -91,11 +92,7 @@ static bool make_token(char *e) {
 			tokens[nr_token++].type= '+';
 			break;
 		    case '-':
-			if (tokens[nr_token-1].type == NUM) {
-			    tokens[nr_token++].type= '-';
-			} else {
-
-			}
+			tokens[nr_token++].type= '-';
 			break;
 		    case '*':
 			tokens[nr_token++].type= '*';
@@ -115,6 +112,22 @@ static bool make_token(char *e) {
 			    assert(0);
 			strncpy(tokens[nr_token].str, substr_start, substr_len);
 			nr_token++;
+			break;
+		    case NEG:
+			if (tokens[nr_token-1].type == NUM || tokens[nr_token-1].type == NEG) {
+			    tokens[nr_token++].type = '-';
+			    tokens[nr_token].type= NUM;
+			    if (substr_len >= 32)
+				assert(0);
+			    strncpy(tokens[nr_token].str, substr_start+1, substr_len-1);
+			    nr_token++;
+			} else {
+			    tokens[nr_token].type = NEG;
+			    if (substr_len >= 32)
+				assert(0);
+			    strncpy(tokens[nr_token].str, substr_start+1, substr_len-1);
+			    nr_token++;
+			}
 			break;
 		    default: panic("please implement me");
 		}
@@ -198,13 +211,15 @@ int eval(int p, int q, bool *success) {
 	*success = false;
 	return 0;
     } else if (p == q) {
-	if (tokens[p].type != NUM) {
+	if (tokens[p].type != NUM || tokens[p].type != NEG) {
 	    Log("Bad expression");
 	    *success = false;
 	    return 0;
 	}else {
 	    int number;
 	    sscanf(tokens[p].str,"%d",&number);
+	    if (tokens[p].type == NEG)
+		return -number;
 	    return number; 
 	}
     } else if (check_parentheses(p, q)) {
