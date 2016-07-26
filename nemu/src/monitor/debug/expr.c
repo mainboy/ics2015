@@ -211,7 +211,7 @@ int eval(int p, int q, bool *success) {
 	*success = false;
 	return 0;
     } else if (p == q) {
-	if (tokens[p].type != NUM || tokens[p].type != NEG) {
+	if (tokens[p].type != NUM && tokens[p].type != NEG) {
 	    Log("Bad expression");
 	    *success = false;
 	    return 0;
