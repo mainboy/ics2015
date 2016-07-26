@@ -7,7 +7,7 @@
 #include <regex.h>
 
 enum {
-    NOTYPE = 256, EQ, NUM, NEG
+    NOTYPE = 256, EQ, NUM, NEG, NEQ, AND, OR
 
 	/* TODO: Add more token types */
 
@@ -31,7 +31,10 @@ static struct rule {
     {"\\(", '('},					// 
     {"\\)", ')'},					// 
     {"[0-9]+", NUM},					// number
-    {"==", EQ}						// equal
+    {"==", EQ},						// equal
+    {"!=", NEQ},					// not equal
+    {"&&", AND},					// and
+    {"||", OR},						// or
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -136,6 +139,15 @@ static bool make_token(char *e) {
 		    case EQ:
 			tokens[nr_token++].type = EQ;
 			break;
+		    case NEQ:
+			tokens[nr_token++].type = NEQ;
+			break;
+		    case AND:
+			tokens[nr_token++].type = AND;
+			break;
+		    case OR:
+			tokens[nr_token++].type = OR;
+			break;
 		    default: panic("please implement me");
 		}
 
@@ -177,7 +189,7 @@ bool check_parentheses(int p, int q) {
 int found_op(int p, int q) {
 	int op_type=0, cur=0, top=0, i;
 	for(i=p; i<=q; i++) {
-	    if (tokens[i].type == EQ) {
+	    if (tokens[i].type == EQ || tokens[i].type == NEQ || tokens[i].type == AND || tokens[i].type == OR) {
 		op_type = i;
 		return op_type;
 	    }
@@ -196,7 +208,7 @@ int found_op(int p, int q) {
 	    }
 	}
 	for( ; i<=q; i++) {
-	    if (tokens[i].type == EQ) {
+	    if (tokens[i].type == EQ || tokens[i].type == NEQ || tokens[i].type == AND || tokens[i].type == OR) {
 		op_type = i;
 		return op_type;
 	    }
@@ -252,6 +264,9 @@ int eval(int p, int q, bool *success) {
 	    case '*': return val1 * val2;
 	    case '/': return val1 / val2;
 	    case EQ : return val1 == val2;
+	    case NEQ: return val1 != val2;
+	    case AND: return val1 && val2;
+	    case OR : return val1 || val2;
 	    default : assert(0);
 	}
 
