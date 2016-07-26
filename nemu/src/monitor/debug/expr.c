@@ -199,35 +199,59 @@ bool check_parentheses(int p, int q) {
 }
 
 int found_op(int p, int q) {
-    int op_type=-1, cur=0, top=0, i;
+    int op_type=-1, cur=0, top=0, priority=0, i;
     for(i=p; i<=q; i++) {
 	if (tokens[i].type == OR) {
-	    if (top <= cur) {
+	    if (top < cur) {
+		op_type = i;
+		cur = top;
+		priority = 1;
+	    } else if(top == cur && priority <= 1){
 		op_type = i;
 		cur = top;
 	    }
 	} else if (tokens[i].type == AND) {
-	    if (top <= cur) {
+	    if (top < cur) {
+		op_type = i;
+		cur = top;
+		priority = 2;
+	    } else if(top == cur && priority <= 2){
 		op_type = i;
 		cur = top;
 	    }
 	} else if (tokens[i].type == EQ || tokens[i].type == NEQ) {
-	    if (top <= cur) {
+	    if (top < cur) {
+		op_type = i;
+		cur = top;
+		priority = 3;
+	    } else if(top == cur && priority <= 3){
 		op_type = i;
 		cur = top;
 	    }
 	} else if (tokens[i].type == '+' || tokens[i].type == '-') {
-	    if (top <= cur) {
+	    if (top < cur) {
+		op_type = i;
+		cur = top;
+		priority = 4;
+	    } else if(top == cur && priority <= 4){
 		op_type = i;
 		cur = top;
 	    }
 	} else if (tokens[i].type == '*' || tokens[i].type == '/') {
-	    if (top <= cur) {
+	    if (top < cur) {
+		op_type = i;
+		cur = top;
+		priority = 5;
+	    } else if(top == cur && priority <= 5){
 		op_type = i;
 		cur = top;
 	    }
 	} else if (tokens[i].type == NO) {
-	    if (top <= cur) {
+	    if (top < cur) {
+		op_type = i;
+		cur = top;
+		priority = 6;
+	    } else if(top == cur && priority <= 6){
 		op_type = i;
 		cur = top;
 	    }
