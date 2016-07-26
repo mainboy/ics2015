@@ -196,30 +196,16 @@ bool check_parentheses(int p, int q) {
 }
 
 int found_op(int p, int q) {
-	int op_type=0, cur=0, top=0, i;
+	int op_type=-1, cur=0, top=0, i;
 	for(i=p; i<=q; i++) {
-	    if (tokens[i].type == EQ || tokens[i].type == NEQ || tokens[i].type == AND || tokens[i].type == OR) {
-		op_type = i;
-		return op_type;
+	    if (tokens[i].type == OR) {
+		return i;
 	    }
-	    if (tokens[i].type == '+' || tokens[i].type == '-') {
-		    op_type = i;
-		    cur = top;
-		    break;
-	    }else if (tokens[i].type == '*' || tokens[i].type == '/') {
-		    op_type = i;
-		    cur = top;
-		    break;
-	    }else if (tokens[i].type == '(') {
-		top++;
-	    }else if (tokens[i].type == ')') {
-		top--;
+	    if (tokens[i].type == AND) {
+		return i;
 	    }
-	}
-	for( ; i<=q; i++) {
-	    if (tokens[i].type == EQ || tokens[i].type == NEQ || tokens[i].type == AND || tokens[i].type == OR) {
-		op_type = i;
-		return op_type;
+	    if (tokens[i].type == EQ || tokens[i].type == NEQ) {
+		return i;
 	    }
 	    if (tokens[i].type == '+' || tokens[i].type == '-') {
 		if (top <= cur) {
