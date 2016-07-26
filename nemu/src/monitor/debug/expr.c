@@ -30,7 +30,7 @@ static struct rule {
     {"\\/", '/'},					// by/divide
     {"\\(", '('},					// 
     {"\\)", ')'},					// 
-    {"\\$[eax|ebx|ecx|edx|esp]", REG},		// register
+    {"\\$[(eax)|ebx|ecx|edx|esp]", REG},		// register
     {"0x[0-9a-f]+", HEX},				// hexadecimal-number
     {"[0-9]+", NUM},					// decimal-number
     {"==", EQ},						// equal
