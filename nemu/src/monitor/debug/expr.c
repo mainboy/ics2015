@@ -23,6 +23,7 @@ static struct rule {
      */
 
     {" +",	NOTYPE},				// spaces
+    {"\\-[0-9]+", NEG},					// negative number
     {"\\+", '+'},					// plus/add
     {"\\-", '-'},					// minus/subtract
     {"\\*", '*'},					// times/multiply
@@ -30,7 +31,6 @@ static struct rule {
     {"\\(", '('},					// 
     {"\\)", ')'},					// 
     {"[0-9]+", NUM},					// number
-    {"\\-[0-9]+", NEG},					// negative number
     {"==", EQ}						// equal
 };
 
