@@ -30,7 +30,7 @@ static struct rule {
     {"\\/", '/'},					// by/divide
     {"\\(", '('},					// 
     {"\\)", ')'},					// 
-    {"\\$e([a-d]x)|([b|s]p)", REG},		// register
+    {"[\\$e([a-d]x)|\\$e([b|s]p)]", REG},		// register
     {"0x[0-9a-f]+", HEX},				// hexadecimal-number
     {"[0-9]+", NUM},					// decimal-number
     {"==", EQ},						// equal
