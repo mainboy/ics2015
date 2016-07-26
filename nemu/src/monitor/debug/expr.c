@@ -267,18 +267,29 @@ int eval(int p, int q, bool *success) {
 	*success = false;
 	return 0;
     } else if (p == q) {
-	if (tokens[p].type != NUM && tokens[p].type != NEG && tokens[p].type != HEX) {
+	if (tokens[p].type != NUM && tokens[p].type != NEG && tokens[p].type != HEX && tokens[p].type != REG) {
 	    Log("Bad expression");
 	    *success = false;
 	    return 0;
 	}else {
 	    int number;
-	    sscanf(tokens[p].str,"%d",&number);
-	    if (tokens[p].type == HEX)
-		sscanf(tokens[p].str,"%x",&number);
-	    if (tokens[p].type == NEG)
-		return -number;
-	    return number; 
+	    if (tokens[p].type == REG) {
+		switch (*(tokens[p].str+2)) {
+		    case 'a': return cpu.eax;
+		    case 'b': if (*(tokens[p].str+3)=='x') return cpu.ebx; else return cpu.ebp;
+		    case 'c': return cpu.ecx;
+		    case 'd': if (*(tokens[p].str+3)=='x') return cpu.edx; else return cpu.edi;
+		    case 's': if (*(tokens[p].str+3)=='p') return cpu.esp; else return cpu.esi;
+		    default: panic("please implement me");
+		}
+	    } else {
+		sscanf(tokens[p].str,"%d",&number);
+		if (tokens[p].type == HEX)
+		    sscanf(tokens[p].str,"%x",&number);
+		if (tokens[p].type == NEG)
+		    return -number;
+	    }
+	    return number;
 	}
     } else if (check_parentheses(p, q)) {
 	return eval(p+1, q-1, success);
