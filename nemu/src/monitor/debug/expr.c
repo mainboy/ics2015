@@ -7,7 +7,7 @@
 #include <regex.h>
 
 enum {
-    NOTYPE = 256, EQ, NUM, NEG, NEQ, AND, OR
+    NOTYPE = 256, EQ, NUM, NEG, NEQ, AND, OR, HEX
 
 	/* TODO: Add more token types */
 
@@ -30,11 +30,12 @@ static struct rule {
     {"\\/", '/'},					// by/divide
     {"\\(", '('},					// 
     {"\\)", ')'},					// 
-    {"[0-9]+", NUM},					// number
+    {"[0-9]+", NUM},					// decimal-number
+    {"0x[0-9a-f]+", HEX},				// hexadecimal-number
     {"==", EQ},						// equal
     {"!=", NEQ},					// not equal
     {"&&", AND},					// and
-    {"\\|\\|", OR},						// or
+    {"\\|\\|", OR},					// or
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -119,7 +120,7 @@ static bool make_token(char *e) {
 			    assert(0);
 			strncpy(tokens[nr_token].str, substr_start, substr_len);
 			nr_token++;
-			break;
+			break ;
 		    case NEG:
 			if (tokens[nr_token-1].type == NUM || tokens[nr_token-1].type == NEG) {
 			    tokens[nr_token++].type = '-';
@@ -147,6 +148,13 @@ static bool make_token(char *e) {
 			break;
 		    case OR:
 			tokens[nr_token++].type = OR;
+			break;
+		    case HEX:
+			tokens[nr_token].type= HEX;
+			if (substr_len >= 32)
+			    assert(0);
+			strncpy(tokens[nr_token].str, substr_start, substr_len);
+			nr_token++;
 			break;
 		    default: panic("please implement me");
 		}
