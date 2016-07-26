@@ -147,7 +147,7 @@ static bool make_token(char *e) {
 		    case AND:
 			tokens[nr_token++].type = AND;
 			break;
-		    case OR:
+		    case OR :
 			tokens[nr_token++].type = OR;
 			break;
 		    case HEX:
@@ -156,6 +156,9 @@ static bool make_token(char *e) {
 			    assert(0);
 			strncpy(tokens[nr_token].str, substr_start, substr_len);
 			nr_token++;
+			break;
+		    case NO :
+			tokens[nr_token++].type = NO;
 			break;
 		    default: panic("please implement me");
 		}
@@ -196,7 +199,7 @@ bool check_parentheses(int p, int q) {
 }
 
 int found_op(int p, int q) {
-	int op_type=-1, cur=0, top=0, i;
+	int op_type=-1, cur=0, top=0, i, flag_NO=-1;
 	for(i=p; i<=q; i++) {
 	    if (tokens[i].type == OR) {
 		return i;
@@ -222,8 +225,13 @@ int found_op(int p, int q) {
 	    }else if (tokens[i].type == ')') {
 		top--;
 	    }
+	    if (tokens[i].type == NO) {
+		flag_NO = i;
+	    }
 	}
 
+	if(op_type == -1)
+	    op_type = flag_NO; 
 	return op_type;
 }
 
@@ -249,9 +257,11 @@ int eval(int p, int q, bool *success) {
     } else if (check_parentheses(p, q)) {
 	return eval(p+1, q-1, success);
     } else {
-	int op_type=found_op(p, q);
-	int val1 = eval(p, op_type -1, success);
-	if (*success==false) return 0;
+	int op_type=found_op(p, q), val1=0;
+	if (tokens[op_type].type != NO) {
+	    val1 = eval(p, op_type -1, success);
+	    if (*success==false) return 0;
+	}
 	int val2 = eval(op_type + 1, q, success);
 	if (*success==false) return 0;
 
@@ -264,6 +274,7 @@ int eval(int p, int q, bool *success) {
 	    case NEQ: return val1 != val2;
 	    case AND: return val1 && val2;
 	    case OR : return val1 || val2;
+	    case NO : return !val2;
 	    default : assert(0);
 	}
 
