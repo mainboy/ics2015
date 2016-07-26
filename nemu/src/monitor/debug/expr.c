@@ -92,6 +92,10 @@ static bool make_token(char *e) {
 			tokens[nr_token++].type= '+';
 			break;
 		    case '-':
+			if (nr_token == 0){
+			    tokens[nr_token].type = NUM;
+			    strcpy(tokens[nr_token++].str,"0");
+			}
 			tokens[nr_token++].type= '-';
 			break;
 		    case '*':
