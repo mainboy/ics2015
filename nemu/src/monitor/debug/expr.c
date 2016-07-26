@@ -228,6 +228,7 @@ int found_op(int p, int q) {
 	}
     }
 
+    Log("%d\n", op_type);
     return op_type;
 }
 
