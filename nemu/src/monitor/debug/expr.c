@@ -133,6 +133,9 @@ static bool make_token(char *e) {
 			    nr_token++;
 			}
 			break;
+		    case EQ:
+			tokens[nr_token++].type = EQ;
+			break;
 		    default: panic("please implement me");
 		}
 
@@ -174,6 +177,10 @@ bool check_parentheses(int p, int q) {
 int found_op(int p, int q) {
 	int op_type=0, cur=0, top=0, i;
 	for(i=p; i<=q; i++) {
+	    if (tokens[i].type == EQ) {
+		op_type = i;
+		return op_type;
+	    }
 	    if (tokens[i].type == '+' || tokens[i].type == '-') {
 		    op_type = i;
 		    cur = top;
@@ -189,6 +196,10 @@ int found_op(int p, int q) {
 	    }
 	}
 	for( ; i<=q; i++) {
+	    if (tokens[i].type == EQ) {
+		op_type = i;
+		return op_type;
+	    }
 	    if (tokens[i].type == '+' || tokens[i].type == '-') {
 		if (top <= cur) {
 		    op_type = i;
@@ -240,6 +251,7 @@ int eval(int p, int q, bool *success) {
 	    case '-': return val1 - val2;
 	    case '*': return val1 * val2;
 	    case '/': return val1 / val2;
+	    case EQ : return val1 == val2;
 	    default : assert(0);
 	}
 
