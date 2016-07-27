@@ -72,4 +72,14 @@ void print_wp() {
 
 }
 
+bool check_wp() {
+	WP *p=head;
+	bool success;
+	while(NULL != p){
+		if(expr(p->str,&success) != p->val)
+			return true;
+		p=p->next;
+	}
+	return false;
+}
 
