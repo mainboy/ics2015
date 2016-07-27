@@ -94,7 +94,7 @@ static int cmd_w(char *args) {
 }
 
 static int cmd_d(char *args) {
-	WP *p=NULL;
+	WP *p = malloc(sizeof(WP));
 	p->NO = atoi(args);
 	free_wp(p);
 	return 0;
