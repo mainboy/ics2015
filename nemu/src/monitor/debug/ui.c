@@ -56,7 +56,7 @@ static int cmd_info(char *args) {
 		printf("esi	0x%x\n",cpu.esi);
 		printf("edi	0x%x\n",cpu.edi);
 	} else if (strcmp(args, "w")==0 || strcmp(args, "watchpoints")==0){
-		
+		print_wp();	
 	}
 
 	return 0;
