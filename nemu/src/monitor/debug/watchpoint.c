@@ -75,9 +75,16 @@ void print_wp() {
 bool check_wp() {
 	WP *p=head;
 	bool success;
+	int val;
 	while(NULL != p){
-		if(expr(p->str,&success) != p->val)
+		val = expr(p->str,&success);
+		if (val != p->val) {
+			printf("Hardware watchpoints %d: %s\n",p->NO,p->str);
+			printf("Old value = %d\n",p->val);
+			printf("New value = %d\n",val);
+			p->val = val;
 			return true;
+		}
 		p=p->next;
 	}
 	return false;
