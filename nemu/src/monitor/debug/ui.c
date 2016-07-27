@@ -65,13 +65,16 @@ static int cmd_info(char *args) {
 static int cmd_x(char *args) {
 	char* num = strtok(args, " ");
 	args = num + strlen(num) + 1;
-	swaddr_t addr;
-	sscanf(args, "%x\n",&addr);
+	bool success=true;
+	uint32_t val = expr(args, &success);
+	if (success == false) {
+		Log("Regular expression has errors.");
+		return 0;
+	}
 	int len = atoi(num),i;
-	printf("%8x:    ", addr);
 	for (i=0; i<len; i++){
-		printf("%02x ",instr_fetch(addr, 1));
-		addr = addr+1;
+		printf("%02x ",instr_fetch(val, 1));
+		val = val+1;
 	}
 	printf("\n");
 	return 0;
