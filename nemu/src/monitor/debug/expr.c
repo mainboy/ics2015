@@ -7,7 +7,7 @@
 #include <regex.h>
 
 enum {
-    NOTYPE = 256, EQ, NUM, NEG, NEQ, AND, OR, NO, HEX, REG
+    NOTYPE = 256, EQ, NUM, NEG, NEQ, AND, OR, NO, HEX, REG, DEFER
 
 	/* TODO: Add more token types */
 
@@ -105,7 +105,10 @@ static bool make_token(char *e) {
 			tokens[nr_token++].type= '-';
 			break;
 		    case '*':
-			tokens[nr_token++].type= '*';
+			if (tokens[nr_token-1].type == REG || tokens[nr_token-1].type == NUM || tokens[nr_token-1].type == HEX || tokens[nr_token-1].type == ')')
+			    tokens[nr_token++].type= '*';
+			else 
+			    tokens[nr_token++].type= DEFER;
 			break;
 		    case '/':
 			tokens[nr_token++].type= '/';
@@ -150,7 +153,7 @@ static bool make_token(char *e) {
 			break;
 		    case OR :
 			tokens[nr_token++].type = OR;
-			break;
+			break; 
 		    case HEX:
 			tokens[nr_token].type= HEX;
 			if (substr_len >= 32)
@@ -244,7 +247,7 @@ int found_op(int p, int q) {
 		cur = top;
 		priority = cur_priority;
 	    }
-	} else if (tokens[i].type == NO) {
+	} else if (tokens[i].type == NO || tokens[i].type == DEFER) {
 	    int cur_priority = 6;
 	    if (top < cur || (top == cur && cur_priority <= priority)) {
 		op_type = i;
@@ -295,7 +298,7 @@ int eval(int p, int q, bool *success) {
 	return eval(p+1, q-1, success);
     } else {
 	int op_type=found_op(p, q), val1=0;
-	if (tokens[op_type].type != NO) {
+	if (tokens[op_type].type != NO && tokens[op_type].type != DEFER) {
 	    val1 = eval(p, op_type -1, success);
 	    if (*success==false) return 0;
 	}
@@ -312,6 +315,7 @@ int eval(int p, int q, bool *success) {
 	    case AND: return val1 && val2;
 	    case OR : return val1 || val2;
 	    case NO : return !val2;
+	    case DEFER: return swaddr_read(val2, 1);
 	    default : assert(0);
 	}
 
