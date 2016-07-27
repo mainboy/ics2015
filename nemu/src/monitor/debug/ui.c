@@ -86,7 +86,8 @@ static int cmd_p(char *args) {
 
 static int cmd_w(char *args) {
 	WP *p= new_wp();
-	p->NO = 1;
+	strcpy(p->str,args);
+	printf("Hardware watchpoint %d: %s\n",p->NO,p->str);
 	return 0;
 }
 
