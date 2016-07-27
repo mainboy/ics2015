@@ -62,5 +62,14 @@ void free_wp(WP *wp) {
 
 }
 
+void print_wp() {
+	WP *p=head;
+	printf("Num         Type         What\n");
+	while(NULL != p){
+		printf("%d        hw watchpoint     %s",p->NO, p->str);
+		p=p->next;
+	}
+
+}
 
 
