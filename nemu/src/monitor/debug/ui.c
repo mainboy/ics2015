@@ -85,7 +85,8 @@ static int cmd_p(char *args) {
 }
 
 static int cmd_w(char *args) {
-	
+	WP *p= new_wp();
+	p->NO = 1;
 	return 0;
 }
 
