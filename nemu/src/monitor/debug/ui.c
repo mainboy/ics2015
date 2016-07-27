@@ -80,8 +80,10 @@ static int cmd_x(char *args) {
 static int cmd_p(char *args) {
 	bool success=true;
 	int val = expr(args, &success);
-	if (success == false)
-		panic("Some errors happened.");
+	if (success == false) {
+		Log("Regular expression has errors.");
+		return 0;
+	}
 	printf("%d	    0x%x\n",val, val);
 	return 0;
 }
@@ -89,6 +91,13 @@ static int cmd_p(char *args) {
 static int cmd_w(char *args) {
 	WP *p= new_wp();
 	strcpy(p->str,args);
+	bool success=true;
+	int val = expr(args, &success);
+	if (success == false) {
+		Log("Regular expression has errors.");
+		return 0;
+	}
+	p->val = val;
 	printf("Hardware watchpoint %d: %s\n",p->NO,p->str);
 	return 0;
 }
