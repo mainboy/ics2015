@@ -93,6 +93,13 @@ static int cmd_w(char *args) {
 	return 0;
 }
 
+static int cmd_d(char *args) {
+	WP *p=NULL;
+	p->NO = atoi(args);
+	free_wp(p);
+	return 0;
+}
+
 static struct {
 	char *name;
 	char *description;
@@ -105,7 +112,8 @@ static struct {
 	{ "info", "Print state of registers or infomation of watchpoints", cmd_info },
 	{ "x", "Scan instructions in memory", cmd_x },
 	{ "p", "Test expr", cmd_p },
-	{ "w", "Implement watchpoints", cmd_w },
+	{ "w", "Add watchpoints", cmd_w },
+	{ "d", "Delete watchpoints", cmd_d },
 
 	/* TODO: Add more commands */
 
