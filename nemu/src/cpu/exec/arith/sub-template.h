@@ -3,6 +3,8 @@
 #define instr sub
 
 static void do_execute() {
+	Log("op_src = %x\n", op_src->val);
+
 	panic("Please Implement me.");
 }
 
