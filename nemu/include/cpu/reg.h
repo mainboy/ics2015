@@ -49,4 +49,23 @@ extern const char* regsl[];
 extern const char* regsw[];
 extern const char* regsb[];
 
+typedef union {
+	struct{
+		uint32_t CF:1;
+		uint32_t dont_care1:1;
+		uint32_t PF:1;
+		uint32_t dont_care3:3;
+		uint32_t ZF:1;
+		uint32_t SF:1;
+		uint32_t dont_care8:1;
+		uint32_t IF:1;
+		uint32_t DF:1;
+		uint32_t OF:1;
+		uint32_t dont_care12:20;
+	};
+	uint32_t val;
+}EFLAGS;
+
+
+
 #endif
