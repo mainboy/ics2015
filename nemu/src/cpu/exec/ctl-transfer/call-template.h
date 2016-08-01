@@ -3,7 +3,7 @@
 #define instr call
 
 static void do_execute() {
-	Log("%x\n",op_src->val);
+	Log("%x\n%x\n",op_src->val, DATA_BYTE);
 	panic("Please Implement me.");
 }
 
