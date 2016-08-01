@@ -9,7 +9,7 @@ static void do_execute() {
 		cpu.eip = cpu.eip+op_src->val;
 	}
 
-	print_asm("call" " 0x%x", cpu.eip+1);
+	print_asm_template1();
 }
 
 make_instr_helper(i)
