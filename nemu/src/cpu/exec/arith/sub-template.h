@@ -3,10 +3,7 @@
 #define instr sub
 
 static void do_execute() {
-	op_src->simm = ~op_src->simm;
-	op_src->val = op_src->simm;
-	Log("%d\n",REG(op_dest->reg)- op_src->simm);
-	//OPERAND_W(op_dest,REG(op_dest->reg)-op_src->simm);
+	OPERAND_W(op_dest,REG(op_dest->reg)-op_src->val);
 	print_asm_template2();
 }
 
