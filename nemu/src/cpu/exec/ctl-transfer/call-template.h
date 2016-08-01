@@ -3,8 +3,11 @@
 #define instr call
 
 static void do_execute() {
-	Log("%x\n%x\n",op_src->val, DATA_BYTE);
-	panic("Please Implement me.");
+	if (DATA_BYTE == 2){
+		cpu.eip = (cpu.eip+op_src->val) & 0x0000ffff;
+	} else if (DATA_BYTE == 4) {
+		cpu.eip = cpu.eip+op_src->val;
+	}
 }
 
 make_instr_helper(i)
