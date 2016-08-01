@@ -5,7 +5,7 @@
 static void do_execute() {
 	op_src->simm = ~op_src->simm;
 	op_src->val = op_src->simm;
-	Log("%x\n%x\n",op_src->val,op_src->simm);
+	Log("%d\n%d\n",op_src->val,op_src->simm);
 	//OPERAND_W(op_dest,REG(op_dest->reg)-op_src->simm);
 	print_asm_template2();
 }
