@@ -14,6 +14,7 @@ make_helper(concat(decode_i_, SUFFIX)) {
 	op_src->type = OP_TYPE_IMM;
 	op_src->imm = instr_fetch(eip, DATA_BYTE);
 	op_src->val = op_src->imm;
+	Log("%x\n%x\n",DATA_BYTE,op_src->imm);
 
 #ifdef DEBUG
 	snprintf(op_src->str, OP_STR_SIZE, "$0x%x", op_src->imm);
