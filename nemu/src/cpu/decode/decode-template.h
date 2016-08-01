@@ -126,7 +126,10 @@ make_helper(concat(decode_i2rm_, SUFFIX)) {
  */
 make_helper(concat(decode_i2r_, SUFFIX)) {
 	decode_r_internal(eip, op_dest);
-	return decode_i(eip);
+	int len = decode_i(eip);
+	Log("%d\n",len);
+	//return decode_i(eip);
+	return len;
 }
 
 /* used by unary operations */
