@@ -3,7 +3,7 @@
 #define instr sub
 
 static void do_execute() {
-	Log("op_src = %x\n", op_src->val);
+	Log("op_src.imm = %x\n", op_src->simm);
 
 	panic("Please Implement me.");
 }
