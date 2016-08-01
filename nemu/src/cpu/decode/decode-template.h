@@ -117,6 +117,7 @@ make_helper(concat(decode_i2rm_, SUFFIX)) {
 	int len = decode_rm_internal(eip, op_dest, op_src2);		/* op_src2 not use here */
 	Log("%d\n",len);
 	len += decode_i(eip + len);
+	Log("%d\n",len);
 	return len;
 }
 
