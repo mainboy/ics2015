@@ -3,8 +3,9 @@
 #define instr sub
 
 static void do_execute() {
-	Log("op_src.imm = %x\n", op_src->simm);
-
+	Log("%x\n%d\n", op_dest->reg,REG(op_dest->reg));
+	//OPERAND_W(op_dest, op_src);
+	print_asm_template2();
 	panic("Please Implement me.");
 }
 
