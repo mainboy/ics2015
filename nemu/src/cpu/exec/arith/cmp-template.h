@@ -3,7 +3,6 @@
 #define instr cmp
 
 static void do_execute() {
-	Log("%s\n%x\n",REG_NAME(op_dest->reg),op_src->val);
 	if (REG(op_dest->reg)-op_src->val==0) {
 		cpu.EFLAGS.ZF = 1;
 	} else {
