@@ -89,6 +89,7 @@ void restart() {
 	
 	/* Set the initial flag register */
 	cpu.EFLAGS.val = 0x00000002;
+	cpu.ss.val = 0x0000;
 
 	/* Initialize DRAM. */
 	init_ddr3();

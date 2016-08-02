@@ -49,6 +49,15 @@ typedef struct {
 		uint32_t val;
 	}EFLAGS;
 
+	union {
+		struct{
+			uint16_t RPL:2;
+			uint16_t TI:1;
+			uint16_t INDEX:13;
+		};
+		uint16_t val;
+	}cs,ss,ds,es,fs,gs;
+
 } CPU_state;
 
 extern CPU_state cpu;
