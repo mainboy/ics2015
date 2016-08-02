@@ -12,7 +12,6 @@ static void do_execute() {
 	}
 
 	print_asm_template1();
-	panic("hello world");
 }
 
 make_instr_helper(r)
