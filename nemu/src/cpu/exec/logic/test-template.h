@@ -3,8 +3,10 @@
 #define instr test
 
 static void do_execute() {
-	Log("%s\n%x\n%x\n",REG_NAME(op_dest->reg),REG(op_src->reg),REG(op_dest->reg));
-	panic("Please implement me.");
+	OPERAND_W(op_dest, op_dest->val & op_src->val);
+	cpu.EFLAGS.CF=0;
+	cpu.EFLAGS.OF=0;
+	print_asm_template2();
 }
 
 make_instr_helper(r2rm)
