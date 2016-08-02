@@ -3,8 +3,16 @@
 #define instr push
 
 static void do_execute() {
-	Log("%x\n",REG(op_src->reg));
-	panic("Please Implement me.");
+		if (DATA_BYTE == 2) {
+		cpu.esp = cpu.esp - 2;
+		MEM_W(cpu.ss.val+cpu.esp, REG(op_src->reg));
+	} else if (DATA_BYTE == 4) {
+		cpu.esp = cpu.esp - 4;
+		MEM_W(cpu.ss.val+cpu.esp, REG(op_src->reg));
+	}
+
+	print_asm_template1();
+	panic("hello world");
 }
 
 make_instr_helper(r)
