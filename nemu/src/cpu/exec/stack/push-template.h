@@ -3,7 +3,7 @@
 #define instr push
 
 static void do_execute() {
-
+	Log("%d\n%d\n",op_src->reg,op_dest->reg);
 	panic("Please Implement me.");
 }
 
