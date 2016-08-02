@@ -3,7 +3,11 @@
 #define instr test
 
 static void do_execute() {
-	OPERAND_W(op_dest, op_dest->val & op_src->val);
+	if (op_src->val & op_dest->val) {
+		cpu.EFLAGS.ZF=0;
+	}else {
+		cpu.EFLAGS.ZF=1;
+	}
 	cpu.EFLAGS.CF=0;
 	cpu.EFLAGS.OF=0;
 	Log("%x\n",cpu.EFLAGS.ZF);
