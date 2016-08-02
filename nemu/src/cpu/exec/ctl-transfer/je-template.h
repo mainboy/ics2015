@@ -3,7 +3,7 @@
 #define instr je
 
 static void do_execute() {
-	
+	Log("%x\n",op_src->val);
 	panic("Please Implement me.");
 }
 
