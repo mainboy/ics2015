@@ -10,7 +10,6 @@ static void do_execute() {
 	}
 	cpu.EFLAGS.CF=0;
 	cpu.EFLAGS.OF=0;
-	Log("%x\n",cpu.EFLAGS.ZF);
 	print_asm_template2();
 }
 
