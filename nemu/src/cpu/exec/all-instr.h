@@ -29,5 +29,6 @@
 #include "special/special.h"
 
 #include "ctl-transfer/call.h"
+#include "ctl-transfer/je.h"
 
 #include "stack/push.h"
