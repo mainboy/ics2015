@@ -3,8 +3,14 @@
 #define instr je
 
 static void do_execute() {
-	Log("%x\n%x\n",op_src->val,DATA_BYTE);
-	panic("Please Implement me.");
+	if (cpu.EFLAGS.ZF==1) {
+		cpu.eip = cpu.eip+ (DATA_TYPE_S)op_src->val;
+		if (DATA_BYTE == 2){
+			cpu.eip = cpu.eip&0x0000ffff;
+		}
+	}
+
+	print_asm_template1();
 }
 
 make_instr_helper(i)
