@@ -15,13 +15,13 @@
 
 static void do_execute() {
 	if (op_src->type == OP_TYPE_SIMM) {
-		OPERAND_W(op_dest, REG(op_dest->reg)-op_src->simm);
-		DATA_TYPE tmp = REG(op_dest->reg) - op_src->simm;
-		eflags(tmp, REG(op_dest->reg), op_src->simm);
+		OPERAND_W(op_dest, op_dest->val - op_src->simm);
+		DATA_TYPE tmp = op_dest->val - op_src->simm;
+		eflags(tmp, op_dest->val, op_src->simm);
 	} else {
-		OPERAND_W(op_dest,REG(op_dest->reg)-op_src->val);
-		DATA_TYPE tmp = REG(op_dest->reg) - op_src->val;
-		eflags(tmp, REG(op_dest->reg), op_src->val);
+		OPERAND_W(op_dest, op_dest->val - op_src->val);
+		DATA_TYPE tmp = op_dest->val - op_src->val;
+		eflags(tmp, op_dest->val, op_src->val);
 	}
 	print_asm_template2();
 }
