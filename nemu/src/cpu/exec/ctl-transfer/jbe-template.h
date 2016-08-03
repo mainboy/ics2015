@@ -4,6 +4,7 @@
 
 static void do_execute() {
 	if(cpu.EFLAGS.CF==1 || cpu.EFLAGS.ZF==1) {
+		Log("%x\n",cpu.eip);
 		cpu.eip = cpu.eip+(DATA_TYPE_S)op_src->val;
 		Log("%x\n",cpu.eip);
 		if(DATA_BYTE == 2) {
