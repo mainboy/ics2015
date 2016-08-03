@@ -25,7 +25,6 @@ static void do_execute() {
 	}
 	print_asm_template2();
 
-	panic("Please");
 }
 
 make_instr_helper(i2a)
