@@ -31,5 +31,6 @@
 
 #include "ctl-transfer/call.h"
 #include "ctl-transfer/je.h"
+#include "ctl-transfer/jmp.h"
 
 #include "stack/push.h"
