@@ -2,7 +2,7 @@
 
 #define instr sub
 
-#define mflags(tmp, des, src);\
+#define eflags(tmp, des, src);\
 	cpu.EFLAGS.CF= des < src;\
 	cpu.EFLAGS.ZF= (tmp==0);\
 	cpu.EFLAGS.SF= (MSB((DATA_TYPE_S)tmp) == 1);\
@@ -16,12 +16,12 @@
 static void do_execute() {
 	if (op_src->type == OP_TYPE_SIMM) {
 		OPERAND_W(op_dest, REG(op_dest->reg)-op_src->simm);
-		DATA_TYPE tmpd = REG(op_dest->reg) - op_src->simm;
-		mflags(tmpd, REG(op_dest->reg), op_src->simm);
+		DATA_TYPE tmp = REG(op_dest->reg) - op_src->simm;
+		eflags(tmp, REG(op_dest->reg), op_src->simm);
 	} else {
 		OPERAND_W(op_dest,REG(op_dest->reg)-op_src->val);
-		DATA_TYPE tmpd = REG(op_dest->reg) - op_src->val;
-		mflags(tmpd, REG(op_dest->reg), op_src->val);
+		DATA_TYPE tmp = REG(op_dest->reg) - op_src->val;
+		eflags(tmp, REG(op_dest->reg), op_src->val);
 	}
 	print_asm_template2();
 }
