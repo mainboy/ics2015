@@ -3,10 +3,11 @@
 #define instr jmp
 
 static void do_execute() {
-	Log("%x\n",op_src->val);
-	panic("Please");
+	cpu.eip = cpu.eip + op_src->val;
+	if (DATA_BYTE == 2) {
+		cpu.eip = cpu.eip&0x0000ffff;
+	}
 }
-
 
 make_instr_helper(i)
 
