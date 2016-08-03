@@ -15,11 +15,11 @@ while(tmp){\
 
 static void do_execute() {
 	if (op_src->type == OP_TYPE_SIMM) {
-DATA_TYPE tmp = REG(op_dest->reg) - op_src->simm;
-eflags(tmp, REG(op_dest->reg), op_src->simm);
+		DATA_TYPE tmp = REG(op_dest->reg) - op_src->simm;
+		eflags(tmp, REG(op_dest->reg), op_src->simm);
 	} else {
-DATA_TYPE tmp = REG(op_dest->reg) - op_src->val;
-eflags(tmp, REG(op_dest->reg), op_src->val);
+		DATA_TYPE tmp = REG(op_dest->reg) - op_src->val;
+		eflags(tmp, REG(op_dest->reg), op_src->val);
 	}
 
 	print_asm_template2();
