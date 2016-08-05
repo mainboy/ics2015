@@ -5,7 +5,9 @@
 static void do_execute() {
 	cpu.esp -= DATA_BYTE;
 	MEM_W(cpu.esp, op_src->val);
-	Log("%x\n",op_src->val);
+	
+	uint32_t test = MEM_R(cpu.esp);
+	Log("%x\n",test);
 
 	print_asm_template1();
 }
