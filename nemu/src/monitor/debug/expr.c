@@ -283,6 +283,7 @@ int eval(int p, int q, bool *success) {
 					case 'c': return cpu.ecx;
 					case 'd': if (*(tokens[p].str+3)=='x') return cpu.edx; else return cpu.edi;
 					case 's': if (*(tokens[p].str+3)=='p') return cpu.esp; else return cpu.esi;
+					case 'i': if (*(tokens[p].str+3)=='p') return cpu.eip; else panic("please implement me");
 					default: panic("please implement me");
 				}
 			} else {
