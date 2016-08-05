@@ -4,9 +4,9 @@
 
 static void do_execute() {
 	cpu.eip = MEM_R(cpu.esp);
-	Log("%x\n",cpu.esp==reg_l(R_ESP));
+	Log("%x\n",cpu.eip);
 	cpu.esp += DATA_BYTE;
-	Log("%x\n",cpu.esp==reg_l(R_ESP));
+	Log("%x\n",cpu.eip);
 	if (DATA_BYTE == 2) 
 		cpu.eip = cpu.eip & 0x0000ffff;
 
