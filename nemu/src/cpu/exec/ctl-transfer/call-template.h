@@ -5,7 +5,7 @@
 static void do_execute() {
 	Log("%x\n",cpu.eip);
 	cpu.esp -= DATA_BYTE;
-	MEM_W(cpu.esp, cpu.eip + DATA_BYTE);
+	MEM_W(cpu.esp, (uint32_t)(cpu.eip + DATA_BYTE));
 	uint32_t test = MEM_R(cpu.esp);
 	Log("%x\n",test);
 
