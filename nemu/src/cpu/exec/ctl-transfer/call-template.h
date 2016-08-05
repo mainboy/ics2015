@@ -4,7 +4,7 @@
 
 static void do_execute() {
 	cpu.esp -= DATA_BYTE;
-	MEM_W(cpu.esp, (cpu.eip + DATA_BYTE));
+	MEM_W(cpu.esp, (cpu.eip + DATA_BYTE + 1));
 
 	cpu.eip = (cpu.eip+op_src->val);
 	if (DATA_BYTE == 2)
