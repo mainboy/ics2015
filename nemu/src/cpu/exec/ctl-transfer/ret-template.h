@@ -8,7 +8,6 @@ static void do_execute() {
 	if (DATA_BYTE == 2) 
 		cpu.eip = cpu.eip & 0x0000ffff;
 
-	Log("%x\n",cpu.eip);
 	print_asm_template1();
 }
 
