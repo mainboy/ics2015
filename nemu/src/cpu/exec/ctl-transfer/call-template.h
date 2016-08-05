@@ -5,8 +5,6 @@
 static void do_execute() {
 	cpu.esp -= DATA_BYTE;
 	MEM_W(cpu.esp, (cpu.eip + DATA_BYTE));
-	uint32_t test = MEM_R(cpu.esp);
-	Log("%x\n",test);
 
 	cpu.eip = (cpu.eip+op_src->val);
 	if (DATA_BYTE == 2)
