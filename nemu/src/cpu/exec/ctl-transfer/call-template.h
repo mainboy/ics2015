@@ -3,7 +3,7 @@
 #define instr call
 
 static void do_execute() {
-	Log("%x\n",DATA_BYTE);
+	Log("%x\n",cpu.eip + DATA_BYTE);
 	cpu.esp -= DATA_BYTE;
 	MEM_W(cpu.esp, (uint32_t)(cpu.eip + DATA_BYTE));
 	uint32_t test = MEM_R(cpu.esp);
