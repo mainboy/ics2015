@@ -5,6 +5,9 @@
 static void do_execute() {
 	cpu.esp = cpu.ebp;
 	cpu.ebp = MEM_R(cpu.esp);
+
+	Log("%x\n",cpu.ebp);
+
 	cpu.esp += DATA_BYTE;
 	cpu.eip -= DATA_BYTE;
 	
