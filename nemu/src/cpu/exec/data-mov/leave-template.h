@@ -7,6 +7,7 @@ static void do_execute() {
 	cpu.ebp = MEM_R(cpu.esp);
 	cpu.esp += DATA_BYTE;
 
+	Log("%x\n",cpu.eip);
 	panic("hello world");
 	//print_asm_template1();
 }
