@@ -4,8 +4,9 @@
 
 static void do_execute() {
 	Log("%x\n%x\n",op_src->val, op_dest->val);
-	Log("ecx %x\n eax %x\n",cpu.ecx, cpu.eax);
+	Log("%s eax %x\n",REG_NAME(op_dest->reg), cpu.eax);
 	
+	REG(op_dest->reg) = op_src->val;
 
 	panic("Please");
 }
