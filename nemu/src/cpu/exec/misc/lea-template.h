@@ -4,7 +4,7 @@
 
 static void do_execute() {
 	Log("%x\n%x\n",op_src->val, op_dest->val);
-	Log("ecx %x\n eax %x\n",cpu.eax, cpu.ecx);
+	Log("ecx %x\n eax %x\n",cpu.ecx, cpu.eax);
 	
 
 	panic("Please");
