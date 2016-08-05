@@ -5,8 +5,10 @@
 static void do_execute() {
 	cpu.eip = MEM_R(cpu.esp);
 	cpu.esp += DATA_BYTE;
+	Log("%x\n",cpu.eip);
 	if (DATA_BYTE == 2) 
 		cpu.eip = cpu.eip & 0x0000ffff;
+	Log("%x\n",cpu.eip);
 
 	cpu.eip -= 1;
 
