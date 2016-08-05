@@ -29,6 +29,7 @@
 #include "string/rep.h"
 
 #include "misc/misc.h"
+#include "misc/lea.h"
 
 #include "special/special.h"
 
