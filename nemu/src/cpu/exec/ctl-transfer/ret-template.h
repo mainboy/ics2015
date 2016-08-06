@@ -2,6 +2,7 @@
 
 #define instr ret
 
+/*
 static void do_execute() {
 	cpu.eip = MEM_R(cpu.esp);
 	cpu.esp += DATA_BYTE;
@@ -13,7 +14,11 @@ static void do_execute() {
 
 	print_asm_template1();
 }
+*/
 
-make_instr_helper(i)
+make_helper(concat(ret_, SUFFIX)) {
+	panic("hh");
+	return 1;
+}
 
 #include "cpu/exec/template-end.h"
