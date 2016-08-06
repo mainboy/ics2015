@@ -2,15 +2,15 @@
 
 #define instr leave
 
-static void do_execute() {
+make_helper(concat(leave_, SUFFIX)) {
 	cpu.esp = cpu.ebp;
 	cpu.ebp = MEM_R(cpu.esp);
 	cpu.esp += DATA_BYTE;
 	
-	cpu.eip -= DATA_BYTE;
+	Log("leave %x\n", cpu.eip);
 	print_asm_template1();
-}
 
-make_instr_helper(i)
+	return 0;
+}
 
 #include "cpu/exec/template-end.h"
