@@ -10,8 +10,9 @@ make_helper(concat(ret_, SUFFIX)) {
 
 	Log("eip=%x\n",cpu.eip);
 	print_asm_template1();
+	cpu.eip -= 1;
 
-	return 0;
+	return 1;
 }
 
 #include "cpu/exec/template-end.h"
