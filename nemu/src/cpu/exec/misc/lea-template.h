@@ -4,7 +4,7 @@
 
 static void do_execute() {
 	Log("%x\n",op_dest->val==REG(op_dest->reg));
-	Log("%x\n",op_src->val);
+	Log("%s\n",REG_NAME(op_dest->reg));
 	if (op_src->size == DATA_BYTE)
 		op_dest->val = op_src->addr;
 	else 
