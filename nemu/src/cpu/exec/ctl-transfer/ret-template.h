@@ -9,6 +9,7 @@ static void do_execute() {
 		cpu.eip = cpu.eip & 0x0000ffff;
 
 	Log("eip=%x\n",cpu.eip);
+	cpu.eip -= DATA_BYTE;
 
 	print_asm_template1();
 }
