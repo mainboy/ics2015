@@ -3,7 +3,7 @@
 #define instr ret
 
 static void do_execute() {
-	cpu.eip = swaddr_read(cpu.esp, DATA_BYTE);
+	cpu.eip = MEM_R(cpu.esp);
 	cpu.esp += DATA_BYTE;
 	if (DATA_BYTE == 2) 
 		cpu.eip = cpu.eip & 0x0000ffff;
