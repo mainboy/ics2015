@@ -10,7 +10,7 @@ make_helper(concat(leave_, SUFFIX)) {
 	Log("leave %x\n", cpu.eip);
 	print_asm_template1();
 
-	return 0;
+	return 1;
 }
 
 #include "cpu/exec/template-end.h"
