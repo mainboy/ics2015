@@ -3,6 +3,7 @@
 #define instr lea
 
 static void do_execute() {
+	Log("hello");
 	if (op_src->size == DATA_BYTE)
 		op_dest->val = op_src->addr;
 	else 
