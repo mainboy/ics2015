@@ -7,7 +7,7 @@ make_helper(concat(leave_, SUFFIX)) {
 	cpu.ebp = MEM_R(cpu.esp);
 	cpu.esp += DATA_BYTE;
 	
-	print_asm_template1();
+	print_asm("leave");
 
 	return 1;
 }
