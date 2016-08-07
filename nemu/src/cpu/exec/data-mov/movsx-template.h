@@ -4,7 +4,7 @@
 
 static void do_execute() {
 	
-	OPERAND_W(op_dest, (DATA_TYPE_S)op_src->val);
+	OPERAND_W(op_dest, (DATA_TYPE_S)(int8_t)op_src->val);
 	print_asm_template2();
 	
 	//panic("Please implement me");
