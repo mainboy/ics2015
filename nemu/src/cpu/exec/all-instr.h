@@ -42,4 +42,5 @@
 #include "ctl-transfer/jmp.h"
 #include "ctl-transfer/jbe.h"
 #include "ctl-transfer/ret.h"
+#include "ctl-transfer/jne.h"
 
