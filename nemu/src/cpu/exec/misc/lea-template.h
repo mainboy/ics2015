@@ -4,9 +4,9 @@
 
 static void do_execute() {
 	if (op_src->size == DATA_BYTE)
-		REG(op_dest->reg) = op_src->addr;
+		OPERAND_W(op_dest, op_src->addr);
 	else 
-		REG(op_dest->reg) = (uint16_t)(op_src->addr&0x0000ffff);
+		OPERAND_W(op_dest, (uint16_t)(op_src->addr&0x0000ffff));
 
 	print_asm_template2();
 }
