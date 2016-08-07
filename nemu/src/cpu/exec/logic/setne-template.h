@@ -4,17 +4,20 @@
 
 static void do_execute() {
 
-	Log("%s\n",REG_NAME(op_dest->reg));
-	/*
 	if (!cpu.EFLAGS.ZF) {
-		if (op_dest)
-		op_dest->val = 
+		if (op_dest->type == OP_TYPE_REG)
+			REG(op_dest->reg) = 1;
+		else if (op_dest->type == OP_TYPE_MEM)
+			OPERAND_W(op_dest, 1);
+	} else {
+		if (op_dest->type == OP_TYPE_REG)
+			REG(op_dest->reg) = 0;
+		else if (op_dest->type == OP_TYPE_MEM)
+			OPERAND_W(op_dest, 0);
 	}
-*/
 
 	print_asm_template1();
 
-	panic("hello");
 }
 
 make_instr_helper(rm)
