@@ -5,7 +5,6 @@ make_helper(exec);
 make_helper(rep) {
 	int len;
 	int count = 0;
-	panic("Please implement me");
 	if(instr_fetch(eip + 1, 1) == 0xc3) {
 		/* repz ret */
 		exec(eip + 1);
@@ -27,6 +26,7 @@ make_helper(rep) {
 				);
 
 			/* TODO: Jump out of the while loop if necessary. */
+			panic("Please implement me");
 
 		}
 		len = 1;
