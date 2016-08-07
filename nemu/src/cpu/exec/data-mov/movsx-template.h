@@ -6,6 +6,7 @@ static void do_execute() {
 	
 	REG(op_dest->reg) = (DATA_TYPE_S)op_src->val;
 	Log("%x\n",op_dest->size);
+	Log("%s %s\n",REG_NAME(op_src->reg),REG_NAME(op_dest->reg));
 	print_asm_template2();
 	
 	panic("Please implement me");
