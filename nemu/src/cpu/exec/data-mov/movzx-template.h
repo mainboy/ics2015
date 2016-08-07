@@ -4,8 +4,7 @@
 
 static void do_execute() {
 	
-	REG(op_dest->reg) = (DATA_TYPE)op_src->val;
-	Log("%x %x\n", op_src->size, op_dest->size);
+	OPERAND_W(op_dest, (DATA_TYPE)op_src->val);
 	print_asm_template2();
 
 }
