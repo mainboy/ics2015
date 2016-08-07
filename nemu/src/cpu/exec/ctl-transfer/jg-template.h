@@ -3,7 +3,7 @@
 #define instr jg
 
 static void do_execute() {
-	if(cpu.EFLAGS.ZF==0 || cpu.EFLAGS.SF==cpu.EFLAGS.OF) {
+	if(cpu.EFLAGS.ZF==0 && cpu.EFLAGS.SF==cpu.EFLAGS.OF) {
 		cpu.eip = cpu.eip+(DATA_TYPE_S)op_src->val;
 		if(DATA_BYTE == 2) {
 			cpu.eip = cpu.eip&0x0000ffff;
