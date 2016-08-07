@@ -28,7 +28,6 @@ make_helper(rep) {
 			/* TODO: Jump out of the while loop if necessary. */
 
 		}
-		panic("Please implement me");
 		len = 1;
 	}
 
