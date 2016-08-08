@@ -13,4 +13,4 @@
 #undef DATA_BYTE
 
 /* for instruction encoding overloading */
-make_helper_v(movs_rm2rm)
+make_helper_v(movs_m)

@@ -2,7 +2,8 @@
 
 #define instr movs
 
-make_helper(concat(movs_rm2rm_, SUFFIX)) {
+make_helper(concat(movs_m_, SUFFIX)) {
+	
 
 	return 1;
 }
