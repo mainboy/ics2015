@@ -15,11 +15,11 @@
 
 
 make_helper(concat(cmps_m_, SUFFIX)) {
-	uint32_t src = MEM_R(reg_l(R_ESI));
-	uint32_t des = MEM_R(reg_l(R_EDI));
-	uint32_t result = src-des;
+	uint32_t des = MEM_R(reg_l(R_ESI));
+	uint32_t src = MEM_R(reg_l(R_EDI));
+	uint32_t result = des-src;
 
-	eflags(result,src,des);
+	eflags(result,des,src);
 	if (cpu.EFLAGS.DF) {
 		reg_l(R_EDI) -= DATA_BYTE;
 		reg_l(R_ESI) -= DATA_BYTE;
