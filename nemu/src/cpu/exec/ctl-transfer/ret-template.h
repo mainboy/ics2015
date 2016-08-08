@@ -20,7 +20,7 @@ make_helper(concat(ret_i_, SUFFIX)) {
 	if (DATA_BYTE == 2) 
 		cpu.eip = cpu.eip & 0x0000ffff;
 
-	Log("%x\n", op_src->val);
+	Log("%x\n", op_dest->val);
 	cpu.esp += op_src->val;
 
 	panic("Please implement me");
