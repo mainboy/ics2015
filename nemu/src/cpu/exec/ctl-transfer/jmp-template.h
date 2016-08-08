@@ -7,6 +7,10 @@ static void do_execute() {
 		cpu.eip = cpu.eip + op_src->val;
 	else {
 		cpu.eip = op_src->val;
+		Log("cpu.eip %x\n", cpu.eip);
+		Log("mem %x\n", MEM_R(op_src->val));
+
+		panic("Please implement me");
 	}
 	
 	if (DATA_BYTE == 2) {
