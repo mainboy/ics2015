@@ -7,8 +7,7 @@ static void do_execute() {
 		cpu.eip = cpu.eip + op_src->val;
 	} else {
 		cpu.eip = op_src->val;
-		Log("%x\n",DATA_BYTE);
-		panic("hello");
+		cpu.eip -= 2;
 	}
 
 	if (DATA_BYTE == 2) {
