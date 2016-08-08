@@ -21,12 +21,9 @@ make_helper(concat(ret_i_, SUFFIX)) {
 	if (DATA_BYTE == 2) 
 		cpu.eip = cpu.eip & 0x0000ffff;
 
-	Log("%x\n", imm);
-	cpu.esp += op_src->val;
+	cpu.esp += imm;
 
-	panic("Please implement me");
-
-	print_asm("ret");
+	print_asm("ret %x", imm);
 	cpu.eip -= 1;
 
 	return 1;
