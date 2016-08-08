@@ -37,6 +37,7 @@
 #include "string/movs.h"
 #include "string/cld.h"
 #include "string/stos.h"
+#include "string/cmps.h"
 
 #include "misc/misc.h"
 
