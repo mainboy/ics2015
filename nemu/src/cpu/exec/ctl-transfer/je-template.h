@@ -9,8 +9,6 @@ static void do_execute() {
 			cpu.eip = cpu.eip&0x0000ffff;
 		}
 
-		Log("%x\n",cpu.eip);
-		panic("Please implement me");
 	}
 
 	print_asm_template1();
