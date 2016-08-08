@@ -9,6 +9,7 @@ static void do_execute() {
 		cpu.eip = op_src->val;
 		Log("cpu.eip %x\n", cpu.eip);
 		Log("mem %x\n", MEM_R(op_src->val));
+		Log("data_byte %x\n", DATA_BYTE);
 
 		panic("Please implement me");
 	}
