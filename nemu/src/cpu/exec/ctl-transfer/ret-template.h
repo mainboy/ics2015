@@ -15,12 +15,13 @@ make_helper(concat(ret_, SUFFIX)) {
 }
 
 make_helper(concat(ret_i_, SUFFIX)) {
+	uint16_t imm = instr_fetch(cpu.eip+1, 2);
 	cpu.eip = MEM_R(cpu.esp);
 	cpu.esp += DATA_BYTE;
 	if (DATA_BYTE == 2) 
 		cpu.eip = cpu.eip & 0x0000ffff;
 
-	Log("%x\n", op_dest->val);
+	Log("%x\n", imm);
 	cpu.esp += op_src->val;
 
 	panic("Please implement me");
