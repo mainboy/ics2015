@@ -3,7 +3,7 @@
 #define instr add
 
 #define eflags(tmp, des, src);\
-	cpu.EFLAGS.CF= (tmp < des || tmp < src);\
+	cpu.EFLAGS.CF= (tmp < des);\
 	cpu.EFLAGS.ZF= (tmp==0);\
 	cpu.EFLAGS.SF= (MSB((DATA_TYPE_S)tmp) == 1);\
 	cpu.EFLAGS.OF= (MSB(des)==MSB(src)) && (MSB(tmp)!=MSB(src));\
