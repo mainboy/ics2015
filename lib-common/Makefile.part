@@ -6,4 +6,11 @@ $(FLOAT): $(FLOAT_OBJ)
 	ar r $(FLOAT) $(FLOAT_OBJ)
 
 # TODO: write a rule for generating $(FLOAT_OBJ)
+CC := gcc
+FLOAT_CFLAGS := -m32 -fno-builtin -c
+FLOAT_CFILES := $$(shell find lib-common/ -name "*.c")
+FLOAT_HFILES := $$(shell find lib-common/ -name "*.h")
+
+FLOAT.o: $(FLOAT_CFILES) $(FLOAT_HFILES)
+	$(CC) $(FLOAT_CFLAGS) $(FLOAT_CFILES) $(FLOAT_HFILES)
 
