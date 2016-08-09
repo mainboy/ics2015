@@ -16,12 +16,12 @@
 static void do_execute() {
 	if (op_src->type == OP_TYPE_SIMM) {
 		OPERAND_W(op_dest, op_dest->val + op_src->simm);
-		DATA_TYPE tmp = op_dest->val + (DATA_TYPE_S)op_src->simm;			
-		eflags(tmp, op_dest->val, (DATA_TYPE_S)op_src->simm);
+		DATA_TYPE tmp = op_dest->val + op_src->simm;			
+		eflags(tmp, op_dest->val, op_src->simm);
 	} else {
 		OPERAND_W(op_dest, op_dest->val + op_src->val);
 		DATA_TYPE tmp = op_dest->val + op_src->val;
-		eflags(tmp, op_dest->val, (DATA_TYPE)op_src->val);   
+		eflags(tmp, op_dest->val, op_src->val);   
 	}
 	print_asm_template2();
 
