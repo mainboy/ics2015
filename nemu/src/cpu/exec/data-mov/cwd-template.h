@@ -4,13 +4,13 @@
 
 make_helper(concat(cwd_, SUFFIX)) {
 	if (DATA_BYTE == 2) {
-		if (reg_w(R_AX) < 0) {
+		if (((DATA_TYPE_S)reg_w(R_AX)) < 0) {
 			reg_w(R_DX) = 0xffff;
 		} else {
 			reg_w(R_DX) = 0;
 		}
 	} else if (DATA_BYTE == 4) {
-		if (reg_l(R_EAX) < 0) {
+		if (((DATA_TYPE_S)reg_l(R_EAX)) < 0) {
 			reg_l(R_EDX) = 0xffffffff;
 		} else {
 			reg_l(R_EDX) = 0;
