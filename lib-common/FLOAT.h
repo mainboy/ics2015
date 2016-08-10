@@ -6,7 +6,7 @@
 typedef int FLOAT;
 
 static inline int F2int(FLOAT a) {
-	int f = (int)(a >> 16);
+	int f = (int)(a/(2^16));
 	return f;
 }
 
