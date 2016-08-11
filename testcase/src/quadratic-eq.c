@@ -20,10 +20,9 @@ int main() {
 	nemu_assert(x1_ans==0x9e35);
 	FLOAT x2_ans = f2F(-1.618);
 	nemu_assert(x2_ans==0xfffe61cb);
-	
-	set_bp();
 
 	nemu_assert(Fabs(x1_ans - x1) < f2F(1e-4));
+	set_bp();
 	nemu_assert(Fabs(x2_ans - x2) < f2F(1e-4));
 
 	HIT_GOOD_TRAP;
