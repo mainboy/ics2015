@@ -54,4 +54,5 @@
 #include "ctl-transfer/jl.h"
 #include "ctl-transfer/jge.h"
 #include "ctl-transfer/ja.h"
+#include "ctl-transfer/jns.h"
 
