@@ -45,7 +45,7 @@ FLOAT f2F(float a) {
 
 FLOAT Fabs(FLOAT a) {
 	if (a < 0)
-		a = -a;
+		return -a;
 	return a;
 }
 
