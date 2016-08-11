@@ -20,8 +20,6 @@ static void do_execute () {
 
 	print_asm("shld" str(SUFFIX) " %s,%s,%s", op_src->str, op_dest->str, op_src2->str);
 	
-	Log(" %s,%s,%s", op_src->str, op_dest->str, op_src2->str);
-	
 }
 
 make_helper(concat(shldi_, SUFFIX)) {
