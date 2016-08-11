@@ -11,8 +11,8 @@ FLOAT F_div_F(FLOAT a, FLOAT b) {
 }
 
 FLOAT f2F(float a) {
-	FLOAT f = (FLOAT)(a*65536);
-	return f;
+	//FLOAT f = (FLOAT)(a*65536);
+	return a*65536;
 }
 
 FLOAT Fabs(FLOAT a) {
