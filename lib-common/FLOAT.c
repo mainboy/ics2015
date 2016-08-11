@@ -11,8 +11,14 @@ FLOAT F_div_F(FLOAT a, FLOAT b) {
 }
 
 FLOAT f2F(float a) {
-	//FLOAT f = (FLOAT)(a*65536);
-	return a*65536;
+	int d = *(int *)&a;
+	int s,e,m;
+	s = d >> 31;
+	e = ((d >> 23) & 0xff) - 127;
+	m = (d & 0x7fffff) | 0x800000;
+	if (s==0)
+		return m >> (7-e);
+	return -(m >> (7-e));
 }
 
 FLOAT Fabs(FLOAT a) {
