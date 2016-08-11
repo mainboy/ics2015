@@ -8,9 +8,7 @@ int main() {
 	nemu_assert(a==0x8000);
 	FLOAT b = f2F(0.5);
 	FLOAT c = f2F(-0.5);
-	nemu_assert(c!=0xffff8000);
-
-	set_bp();
+	nemu_assert(c==0xffff8000);
 
 	FLOAT dt = F_mul_F(b, b) - F_mul_F(F_mul_int(a, 4), c);
 	FLOAT sqrt_dt = sqrt(dt);
@@ -18,10 +16,12 @@ int main() {
 	FLOAT x1 = F_div_F(-b + sqrt_dt, F_mul_int(a, 2));
 	FLOAT x2 = F_div_F(-b - sqrt_dt, F_mul_int(a, 2));
 
-
-	set_bp();
 	FLOAT x1_ans = f2F(0.618);
+	nemu_assert(x1_ans==0x9e35);
 	FLOAT x2_ans = f2F(-1.618);
+	nemu_assert(x2_ans==0xfffe61cb);
+	
+	set_bp();
 
 	nemu_assert(Fabs(x1_ans - x1) < f2F(1e-4));
 	nemu_assert(Fabs(x2_ans - x2) < f2F(1e-4));
