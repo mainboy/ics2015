@@ -10,34 +10,14 @@ FLOAT F_mul_F(FLOAT a, FLOAT b) {
 FLOAT F_div_F(FLOAT a, FLOAT b) {
 	long long A = Fabs(a);
 	long long B = Fabs(b);
-	A *= 65536;
-	B *= 65536;
+	A <<= 16;
+	B <<= 16;
 	FLOAT f = 0;
 	int count = 16;
 	while (A!=0) {
 		if (A >= B) {
 			A -= B;
-			switch (count) {
-				case 0:f = f|1;break;
-				case 1:f = f|2;break;
-				case 2:f = f|4;break;
-				case 3:f = f|8;break;
-				case 4:f = f|16;break;
-				case 5:f = f|32;break;
-				case 6:f = f|64;break;
-				case 7:f = f|128;break;
-				case 8:f = f|256;break;
-				case 9:f = f|512;break;
-				case 10:f = f|1024;break;
-				case 11:f = f|2048;break;
-				case 12:f = f|4096;break;
-				case 13:f = f|8192;break;
-				case 14:f = f|16384;break;
-				case 15:f = f|32768;break;
-				case 16:f = f|65536;break;
-				default: break;
-			}
-			//f |= (1<<count);
+			f |= (1<<count);
 		}
 		if (count == 0) 
 			break;
