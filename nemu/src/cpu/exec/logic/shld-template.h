@@ -10,9 +10,9 @@ static void do_execute () {
 	uint8_t count = op_src->val;
 	count &= 0x1f;
 	while(count != 0) {
-		out >>= 1;
-		out |= (in & 1) << ((DATA_BYTE << 3) - 1);
-		in >>= 1;
+		out <<= 1;
+		out |= ((in >> ((DATA_BYTE << 3) - 1)) & 0x1);
+		in <<= 1;
 		count --;
 	}
 
@@ -22,7 +22,6 @@ static void do_execute () {
 	
 	Log(" %s,%s,%s", op_src->str, op_dest->str, op_src2->str);
 	
-	panic("Please implement me");
 }
 
 make_helper(concat(shldi_, SUFFIX)) {
