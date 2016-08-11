@@ -8,7 +8,24 @@ FLOAT F_mul_F(FLOAT a, FLOAT b) {
 }
 
 FLOAT F_div_F(FLOAT a, FLOAT b) {
-	FLOAT f = ((int)(a/b)) << 16;
+	long long A = Fabs(a);
+	long long B = Fabs(b);
+	A <<= 16;
+	B <<= 16;
+	FLOAT f = 0;
+	int count = 16;
+	while (A!=0) {
+		if (A >= B) {
+			A -= B;
+			f |= (1<<count);
+		}
+		if (count == 0) 
+			break;
+		B >> 1;
+		count--;
+	}
+	if ((a < 0 && b > 0) || (a > 0 && b < 0))
+		return -f;
 	return f;
 }
 
