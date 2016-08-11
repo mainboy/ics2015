@@ -13,7 +13,6 @@ int main() {
 	FLOAT dt = F_mul_F(b, b) - F_mul_F(F_mul_int(a, 4), c);
 	nemu_assert(dt==0x14000);
 	FLOAT sqrt_dt = sqrt(dt);
-	set_bp();
 	nemu_assert(Fabs(F_mul_F(sqrt_dt,sqrt_dt)-0x14000) < f2F(1e-4));
 	set_bp();
 
