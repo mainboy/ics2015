@@ -11,8 +11,8 @@ int main() {
 	nemu_assert(c==0xffff8000);
 
 	FLOAT dt = F_mul_F(b, b) - F_mul_F(F_mul_int(a, 4), c);
-	nemu_assert(dt==0x14000);
 	FLOAT sqrt_dt = sqrt(dt);
+	nemu_assert(sqrt_dt==0x14000);
 
 	FLOAT x1 = F_div_F(-b + sqrt_dt, F_mul_int(a, 2));
 	FLOAT x2 = F_div_F(-b - sqrt_dt, F_mul_int(a, 2));
