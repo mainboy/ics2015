@@ -10,13 +10,16 @@ FLOAT F_mul_F(FLOAT a, FLOAT b) {
 FLOAT F_div_F(FLOAT a, FLOAT b) {
 	long long A = Fabs(a);
 	long long B = Fabs(b);
-	A <<= 16;
-	B <<= 16;
+	A *= 65536;
+	B *= 65536;
 	FLOAT f = 0;
 	int count = 16;
 	while (A!=0) {
 		if (A >= B) {
 			A -= B;
+			switch (count) {
+			case 0:f |= 1;
+			}
 			f |= (1<<count);
 		}
 		if (count == 0) 
