@@ -24,17 +24,17 @@ FLOAT F_div_F(FLOAT a, FLOAT b) {
 				case 3:f = f|8;break;
 				case 4:f = f|16;break;
 				case 5:f = f|32;break;
-				case 6:f |= 64;break;
-				case 7:f |= 128;break;
-				case 8:f |= 256;break;
-				case 9:f |= 512;break;
-				case 10:f |= 1024;break;
-				case 11:f |= 2048;break;
-				case 12:f |= 4096;break;
-				case 13:f |= 8192;break;
-				case 14:f |= 16384;break;
-				case 15:f |= 32768;break;
-				case 16:f |= 65536;break;
+				case 6:f = f|64;break;
+				case 7:f = f|128;break;
+				case 8:f = f|256;break;
+				case 9:f = f|512;break;
+				case 10:f = f|1024;break;
+				case 11:f = f|2048;break;
+				case 12:f = f|4096;break;
+				case 13:f = f|8192;break;
+				case 14:f = f|16384;break;
+				case 15:f = f|32768;break;
+				case 16:f = f|65536;break;
 				default: break;
 			}
 			//f |= (1<<count);
