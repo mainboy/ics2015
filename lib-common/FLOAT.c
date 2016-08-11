@@ -18,9 +18,26 @@ FLOAT F_div_F(FLOAT a, FLOAT b) {
 		if (A >= B) {
 			A -= B;
 			switch (count) {
-			case 0:f |= 1;
+				case 0:f |= 1;break;
+				case 1:f |= 2;break;
+				case 2:f |= 4;break;
+				case 3:f |= 8;break;
+				case 4:f |= 16;break;
+				case 5:f |= 32;break;
+				case 6:f |= 64;break;
+				case 7:f |= 128;break;
+				case 8:f |= 256;break;
+				case 9:f |= 512;break;
+				case 10:f |= 1024;break;
+				case 11:f |= 2048;break;
+				case 12:f |= 4096;break;
+				case 13:f |= 8192;break;
+				case 14:f |= 16384;break;
+				case 15:f |= 32768;break;
+				case 16:f |= 65536;break;
+				default: break;
 			}
-			f |= (1<<count);
+			//f |= (1<<count);
 		}
 		if (count == 0) 
 			break;
