@@ -193,7 +193,7 @@ static bool make_token(char *e) {
 	return true; 
 }
 
-swaddr_t get_value(char *str, bool *success);
+swaddr_t get_var(char *str, bool *success);
 
 bool check_parentheses(int p, int q) {
 	if (tokens[p].type != '(' || tokens[q].type != ')') {
@@ -295,10 +295,9 @@ int eval(int p, int q, bool *success) {
 					default: panic("please implement me");
 				}
 			} else if (tokens[p].type == VAR) {
-				panic("Please implement me");
-
+				number = get_var(tokens[p].str, success);
 			} else {
-				sscanf(tokens[p].str,"%d",&number);
+				 sscanf(tokens[p].str,"%d",&number);
 				if (tokens[p].type == HEX)
 					sscanf(tokens[p].str,"%x",&number);
 				if (tokens[p].type == NEG)
