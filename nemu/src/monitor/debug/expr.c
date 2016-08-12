@@ -176,7 +176,6 @@ static bool make_token(char *e) {
 						tokens[nr_token].type= VAR;
 						strncpy(tokens[nr_token].str, substr_start, substr_len);
 						nr_token++;
-						Log("%s\n",tokens[nr_token-1].str);
 						break ;
 					default: panic("please implement me");
 				}
@@ -277,7 +276,7 @@ int eval(int p, int q, bool *success) {
 		*success = false;
 		return 0;
 	} else if (p == q) {
-		if (tokens[p].type != NUM && tokens[p].type != NEG && tokens[p].type != HEX && tokens[p].type != REG) {
+		if (tokens[p].type != NUM && tokens[p].type != NEG && tokens[p].type != HEX && tokens[p].type != REG && tokens[p].type != VAR) {
 			Log("Bad expression");
 			*success = false;
 			return 0;
@@ -293,6 +292,9 @@ int eval(int p, int q, bool *success) {
 					case 'i': if (*(tokens[p].str+3)=='p') return cpu.eip; else panic("please implement me");
 					default: panic("please implement me");
 				}
+			} else if (tokens[p].type == VAR) {
+				panic("Please implement me");
+
 			} else {
 				sscanf(tokens[p].str,"%d",&number);
 				if (tokens[p].type == HEX)
