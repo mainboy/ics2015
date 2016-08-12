@@ -296,6 +296,9 @@ int eval(int p, int q, bool *success) {
 				}
 			} else if (tokens[p].type == VAR) {
 				number = get_var(tokens[p].str, success);
+				if (!success) {
+					return 0;
+				}
 			} else {
 				 sscanf(tokens[p].str,"%d",&number);
 				if (tokens[p].type == HEX)
