@@ -193,6 +193,8 @@ static bool make_token(char *e) {
 	return true; 
 }
 
+swaddr_t get_value(char *str, bool *success);
+
 bool check_parentheses(int p, int q) {
 	if (tokens[p].type != '(' || tokens[q].type != ')') {
 		return false;
