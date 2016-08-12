@@ -2,6 +2,15 @@
 
 #define instr shrd
 
+#define eflags(tmp);\
+	cpu.EFLAGS.ZF= (tmp==0);\
+        cpu.EFLAGS.SF= (MSB((DATA_TYPE_S)tmp) == 1);\
+        cpu.EFLAGS.PF= 1;\
+        while(tmp){\
+		cpu.EFLAGS.PF = !cpu.EFLAGS.PF;\
+		tmp = tmp & (tmp-1);\
+	}
+
 #if DATA_BYTE == 2 || DATA_BYTE == 4
 static void do_execute () {
 	DATA_TYPE in = op_dest->val;
@@ -16,6 +25,7 @@ static void do_execute () {
 		count --;
 	}
 
+	eflags(out);
 	OPERAND_W(op_src2, out);
 
 	print_asm("shrd" str(SUFFIX) " %s,%s,%s", op_src->str, op_dest->str, op_src2->str);
