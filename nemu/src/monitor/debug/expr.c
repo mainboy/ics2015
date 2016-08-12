@@ -7,7 +7,7 @@
 #include <regex.h>
 
 enum {
-	NOTYPE = 256, EQ, NUM, NEG, NEQ, AND, OR, NO, HEX, REG, DEFER
+	NOTYPE = 256, EQ, NUM, NEG, NEQ, AND, OR, NO, HEX, REG, DEFER, VAR
 
 		/* TODO: Add more token types */
 
@@ -30,14 +30,15 @@ static struct rule {
 	{"\\/", '/'},					// by/divide
 	{"\\(", '('},					// 
 	{"\\)", ')'},					// 
-	{"\\$e(([a-d]x)|([b,s]p)|([s,d]i)|(ip))", REG},		// register
+	{"\\$e(([a-d]x)|([b,s]p)|([s,d]i)|(ip))", REG},	// register
 	{"0x[0-9a-f]+", HEX},				// hexadecimal-number
-	{"[0-9]+", NUM},					// decimal-number
-	{"==", EQ},						// equal
+	{"[0-9]+", NUM},				// decimal-number
+	{"==", EQ},					// equal
 	{"!=", NEQ},					// not equal
 	{"&&", AND},					// and
 	{"\\|\\|", OR},					// or
-	{"!", NO},						// no
+	{"!", NO},					// no
+	{"[a-zA-Z_]+[a-zA-Z0-9_]*", VAR},		// variables
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -83,7 +84,7 @@ static bool make_token(char *e) {
 				char *substr_start = e + position;
 				int substr_len = pmatch.rm_eo;
 
-				//Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s", i, rules[i].regex, position, substr_len, substr_len, substr_start);
+				Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s", i, rules[i].regex, position, substr_len, substr_len, substr_start);
 				position += substr_len;
 
 				/* TODO: Now a new token is recognized with rules[i]. Add codes
