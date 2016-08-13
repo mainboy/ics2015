@@ -120,13 +120,16 @@ static int cmd_bt(char *args) {
 		return 0;
 	}
 
-	swaddr_t addr = cpu.ebp;
+	swaddr_t addr = cpu.eip;
+	swaddr_t tmp = cpu.ebp;
+
 	char *name = NULL;
 	//swaddr_t ret_addr = cpu
 
 	while(get_func(addr,name)) {
 		printf("%s\n",name);
-		addr = swaddr_read(addr,4);
+		addr = swaddr_read(tmp,4);
+		tmp = addr;
 	}
 
 	return 0;
