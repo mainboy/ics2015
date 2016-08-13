@@ -128,7 +128,7 @@ static int cmd_bt(char *args) {
 
 	while(get_func(addr,name)) {
 		name[31]= '\0';
-		printf("#%d  %s (",i++,name);
+		printf("#%d  0x%08x  %s (",i++,addr,name);
 		
 
 		printf(")\n");
