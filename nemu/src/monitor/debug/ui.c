@@ -123,10 +123,10 @@ static int cmd_bt(char *args) {
 	swaddr_t addr = cpu.eip;
 	swaddr_t tmp = cpu.ebp;
 
-	char *name = NULL;
-	//swaddr_t ret_addr = cpu
+	char name[32];
 
 	while(get_func(addr,name)) {
+		name[31]= '\0';
 		printf("%s\n",name);
 		addr = swaddr_read(tmp,4);
 		tmp = addr;
