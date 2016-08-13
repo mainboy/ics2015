@@ -112,6 +112,11 @@ static int cmd_d(char *args) {
 	return 0;
 }
 
+static int cmd_bt(char *args) {
+	
+	return 0;
+}
+
 static struct {
 	char *name;
 	char *description;
@@ -126,6 +131,7 @@ static struct {
 	{ "p", "Test expr", cmd_p },
 	{ "w", "Add watchpoints", cmd_w },
 	{ "d", "Delete watchpoints", cmd_d },
+	{ "bt", "Print stack frame chain", cmd_bt },
 
 	/* TODO: Add more commands */
 

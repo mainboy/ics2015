@@ -8,6 +8,18 @@ static char *strtab = NULL;
 static Elf32_Sym *symtab = NULL;
 static int nr_symtab_entry;
 
+bool get_func(swaddr_t addr, char *name) {
+	int i = 0;
+	for (i=0; i<nr_symtab_entry; i++) {
+		if (addr > symtab[i].st_value && addr < symtab[i].st_value + symtab[i].st_size) {
+			strcpy(name,strtab+symtab[i].st_name);
+			return true;
+		}
+	}
+
+	return false;
+}
+
 swaddr_t get_var(char *str, bool *success) {
 	int i = 0;
 	for (i=0; i<nr_symtab_entry; i++) {
