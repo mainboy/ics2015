@@ -128,7 +128,7 @@ static int cmd_bt(char *args) {
 	while(get_func(addr,name)) {
 		name[31]= '\0';
 		printf("%s\n",name);
-		addr = swaddr_read(tmp,4);
+		addr = swaddr_read(tmp+4,4);
 		tmp = addr;
 	}
 
