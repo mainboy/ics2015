@@ -124,10 +124,14 @@ static int cmd_bt(char *args) {
 	swaddr_t tmp = cpu.ebp;
 
 	char name[32];
+	int i=0;
 
 	while(get_func(addr,name)) {
 		name[31]= '\0';
-		printf("%s\n",name);
+		printf("#%d  %s (",i++,name);
+		
+
+		printf(")\n");
 		addr = swaddr_read(tmp+4,4);
 		tmp = addr;
 	}
