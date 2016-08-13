@@ -130,7 +130,7 @@ static int cmd_bt(char *args) {
 		name[31]= '\0';
 		printf("#%d  0x%08x  %s (",i++,addr,name);
 		for (index=2; index < 5; index++) {
-			printf("%x",swaddr_read(tmp+4*index,4));
+			printf("%x,",swaddr_read(tmp+4*index,4));
 		}
 		printf("%x",swaddr_read(tmp+4*index,4));
 		printf(")\n");
