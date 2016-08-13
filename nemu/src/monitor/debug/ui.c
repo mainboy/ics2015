@@ -116,7 +116,7 @@ bool get_func(swaddr_t addr, char *str);
 
 static int cmd_bt(char *args) {
 	if (NULL != args) {
-		printf("Don't need input anything else.");
+		printf("Don't need input anything else.\n");
 		return 0;
 	}
 
