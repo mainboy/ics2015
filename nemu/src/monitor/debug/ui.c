@@ -112,8 +112,23 @@ static int cmd_d(char *args) {
 	return 0;
 }
 
+bool get_func(swaddr_t addr, char *str);
+
 static int cmd_bt(char *args) {
-	
+	if (NULL != args) {
+		printf("Don't need input anything else.");
+		return 0;
+	}
+
+	swaddr_t addr = cpu.ebp;
+	char *name = NULL;
+	//swaddr_t ret_addr = cpu
+
+	while(get_func(addr,name)) {
+		printf("%s\n",name);
+		addr = swaddr_read(addr,4);
+	}
+
 	return 0;
 }
 
