@@ -49,7 +49,7 @@ void load_elf_tables(int argc, char *argv[]) {
 
 	/* Check ELF header */
 	assert(memcmp(elf->e_ident, magic, 4) == 0);		// magic number
-	Log("%x\n",magic[1]);
+	Log("%x\n",magic[2]);
 	assert(elf->e_ident[EI_CLASS] == ELFCLASS32);		// 32-bit architecture
 	assert(elf->e_ident[EI_DATA] == ELFDATA2LSB);		// littel-endian
 	assert(elf->e_ident[EI_VERSION] == EV_CURRENT);		// current version
