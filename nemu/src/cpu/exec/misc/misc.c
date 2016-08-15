@@ -25,6 +25,7 @@ make_helper(lea) {
 }
 
 make_helper(lgdt) {
+	Log("%x\n",eip);
+
 	panic("Please Implement me");
 }
-
