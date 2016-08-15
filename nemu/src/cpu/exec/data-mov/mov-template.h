@@ -35,8 +35,10 @@ make_helper(concat(mov_cr2r_, SUFFIX)) {
 	} else {
 		REG(r&0x7) = cpu.cr3.val;
 	}
-	Log("%x\n",REG(r&0x7));
-	panic("Please Implement me");
+
+	print_asm("mov" str(SUFFIX) " %%cr%d,%%%s", (r >> 3) & 0x7, REG_NAME(r & 0x7));
+
+	return 2;
 }
 
 #include "cpu/exec/template-end.h"
