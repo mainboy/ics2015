@@ -30,7 +30,9 @@ make_helper(concat(mov_moffs2a_, SUFFIX)) {
 
 make_helper(concat(mov_cr2r_, SUFFIX)) {
 	uint8_t r = instr_fetch(eip+1, 1);
-	Log("%x\n",r);
+	Log("%s\n",REG_NAME(r&0x7));
+	//if ()
+		REG((r>>3)&0x7) = cpu.cr0.val;
 
 	panic("Please Implement me");
 }
