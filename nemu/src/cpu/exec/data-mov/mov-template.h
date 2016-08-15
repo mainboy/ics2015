@@ -29,7 +29,9 @@ make_helper(concat(mov_moffs2a_, SUFFIX)) {
 }
 
 make_helper(concat(mov_cr2r_, SUFFIX)) {
-	
+	uint8_t r = instr_fetch(eip+1, 1);
+	Log("%x\n",r);
+
 	panic("Please Implement me");
 }
 
