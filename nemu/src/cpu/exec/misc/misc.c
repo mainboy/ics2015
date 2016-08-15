@@ -25,7 +25,13 @@ make_helper(lea) {
 }
 
 make_helper(lgdt) {
-	Log("%x\n",eip);
+	ModR_M m;
+	m.val = instr_fetch(eip + 1, 1);
+	int len = load_addr(eip + 1, &m, op_src);
+	cpu.gdtr.limit = lnaddr_read(op_src->addr, 2);
+	cpu.gdtr.base = lnaddr_read(op_src->addr+2, 4);
+	print_asm("lgdt seg_limit:0x%2x, base_addr:0x%x", cpu.gdtr.limit, cpu.gdtr.base);
 
 	panic("Please Implement me");
+	return 1 + len;
 }
