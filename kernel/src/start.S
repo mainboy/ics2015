@@ -37,7 +37,7 @@
 		lgdt    va_to_pa(gdtdesc) # See i386 manual for more information
 		movl    %cr0, %eax        # %CR0 |= PROTECT_ENABLE_BIT
 		orl     $0x1, %eax
-		movl    %ebx, %cr0
+		movl    %eax, %cr0
 
 	# Complete transition to 32-bit protected mode by using long jmp
 	# to reload %CS and %EIP.  The segment descriptors are set up with no
