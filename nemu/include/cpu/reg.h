@@ -49,6 +49,11 @@ typedef struct {
 		uint32_t val;
 	}EFLAGS;
 
+	struct {
+		uint32_t base;
+		uint16_t limit;
+	}gdtr;
+
 	union {
 		struct{
 			uint16_t RPL:2;
