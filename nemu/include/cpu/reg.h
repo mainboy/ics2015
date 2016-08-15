@@ -54,6 +54,9 @@ typedef struct {
 		uint16_t limit;
 	}gdtr;
 
+	CR0 cr0;
+	CR3 cr3;
+
 	union {
 		struct{
 			uint16_t RPL:2;
