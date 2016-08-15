@@ -43,6 +43,7 @@ make_helper(concat(mov_cr2r_, SUFFIX)) {
 
 make_helper(concat(mov_r2cr_, SUFFIX)) {
 	uint8_t r = instr_fetch(eip+1, 1);
+	Log("%x\n%x\n",r&0x7,(r>>3)&0x7);
 	if ( ((r>>3) &0x7) ==0) {
 		REG(r&0x7) = cpu.cr0.val;
 	} else {
