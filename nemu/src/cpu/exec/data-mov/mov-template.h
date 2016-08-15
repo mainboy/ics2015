@@ -41,4 +41,18 @@ make_helper(concat(mov_cr2r_, SUFFIX)) {
 	return 2;
 }
 
+make_helper(concat(mov_r2cr_, SUFFIX)) {
+	uint8_t r = instr_fetch(eip+1, 1);
+	if ( ((r>>3) &0x7) ==0) {
+		REG(r&0x7) = cpu.cr0.val;
+	} else {
+		REG(r&0x7) = cpu.cr3.val;
+	}
+
+	print_asm("mov" str(SUFFIX) " %%%s,%%cr%d", REG_NAME(r & 0x7), (r >> 3) & 0x7);
+	panic("Please implement me");
+
+	return 2;
+}
+
 #include "cpu/exec/template-end.h"
