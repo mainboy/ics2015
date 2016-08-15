@@ -54,4 +54,9 @@ make_helper(concat(mov_r2cr_, SUFFIX)) {
 	return 2;
 }
 
+make_helper(concat(mov_rm2s_, SUFFIX)) {
+
+	panic("Please implement me");
+}
+
 #include "cpu/exec/template-end.h"
