@@ -55,8 +55,11 @@ make_helper(concat(mov_r2cr_, SUFFIX)) {
 }
 
 make_helper(concat(mov_rm2s_, SUFFIX)) {
-
-	panic("Please implement me");
+	uint8_t r = instr_fetch(eip+1, 1);
+	SREG((r>>3)&0x7) = (uint16_t)REG(r&0x7);
+	
+	print_asm("mov" str(SUFFIX) " %%%s,%%%s", REG_NAME(r&0x7), SREG_NAME((r>>3)&0x7));
+	return 2;
 }
 
 #include "cpu/exec/template-end.h"

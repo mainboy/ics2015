@@ -23,9 +23,9 @@ make_instr_helper(rm)
 
 make_helper(concat(ljmp_, SUFFIX)) {
 	cpu.eip = instr_fetch(eip+1, 4);
-	cpu.cs.val = instr_fetch(eip+5, 2);
+	cpu.cs = instr_fetch(eip+5, 2);
 
-	print_asm("ljmp" str(SUFFIX) " $0x%x,$0x%x", cpu.cs.val, cpu.eip);
+	print_asm("ljmp" str(SUFFIX) " $0x%x,$0x%x", cpu.cs, cpu.eip);
 	
 	return 0;
 }
