@@ -21,4 +21,10 @@ static void do_execute() {
 make_instr_helper(i)
 make_instr_helper(rm)
 
+make_helper(concat(ljmp_, SUFFIX)) {
+	
+	panic("Please implement me");
+}
+
+
 #include "cpu/exec/template-end.h"

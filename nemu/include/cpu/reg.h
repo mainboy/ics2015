@@ -64,7 +64,7 @@ typedef struct {
 			uint16_t INDEX:13;
 		};
 		uint16_t val;
-	}cs,ss,ds,es,fs,gs;
+	}cs,ss,ds,es;
 
 } CPU_state;
 
