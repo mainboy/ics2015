@@ -16,15 +16,15 @@ static void do_execute() {
 
 	print_asm_template1();
 
-	panic("Please implement me");
 }
 
 make_instr_helper(i)
 make_instr_helper(rm)
 
 make_helper(concat(ljmp_, SUFFIX)) {
-	
-	return 7;
+		
+
+	panic("Please implement me");
 }
 
 
