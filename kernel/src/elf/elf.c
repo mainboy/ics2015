@@ -39,7 +39,6 @@ uint32_t loader() {
 	// panic("please implement me");
 	ph = (Elf32_Phdr *)(buf + elf->e_phoff);
 	uint16_t i=0;
-	set_bp();
 	for(i=0; i<elf->e_phnum; i++) {
 		/* Scan the program header table, load each segment into memory */
 		if(ph->p_type == PT_LOAD) {
@@ -54,7 +53,7 @@ uint32_t loader() {
 			 * [VirtAddr + FileSiz, VirtAddr + MemSiz)
 			 */
 			memset((void *)vaddr+ph->p_filesz,0,ph->p_memsz-ph->p_filesz);
-
+			set_bp();
 #ifdef IA32_PAGE
 			/* Record the program break for future use. */
 			extern uint32_t brk;
