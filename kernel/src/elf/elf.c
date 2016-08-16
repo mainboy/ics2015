@@ -44,16 +44,16 @@ uint32_t loader() {
 		if(ph->p_type == PT_LOAD) {
 			set_bp();
 
-			uint32_t vaddr = mm_malloc(ph->p_vaddr, ph->p_memsz);
+			uint32_t haddr = mm_malloc(ph->p_vaddr, ph->p_memsz);
 			/* TODO: read the content of the segment from the ELF file 
 			 * to the memory region [VirtAddr, VirtAddr + FileSiz)
 			 */
-			ramdisk_read((uint8_t *)vaddr, ph->p_offset, ph->p_filesz); 
+			ramdisk_read((uint8_t *)haddr, ph->p_offset, ph->p_filesz); 
 
 			/* TODO: zero the memory region 
 			 * [VirtAddr + FileSiz, VirtAddr + MemSiz)
 			 */
-			memset((void *)vaddr+ph->p_filesz,0,ph->p_memsz-ph->p_filesz);
+			memset((void *)haddr+ph->p_filesz,0,ph->p_memsz-ph->p_filesz);
 #ifdef IA32_PAGE
 			/* Record the program break for future use. */
 			extern uint32_t brk;
