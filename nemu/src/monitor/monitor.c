@@ -47,7 +47,6 @@ static void init_ramdisk() {
 	int ret;
 	const int ramdisk_max_size = 0xa0000;
 	FILE *fp = fopen(exec_file, "rb");
-	Log("%s",exec_file);
 	Assert(fp, "Can not open '%s'", exec_file);
 
 	fseek(fp, 0, SEEK_END);
