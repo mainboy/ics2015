@@ -30,7 +30,6 @@ void init() {
 	asm volatile("addl %0, %%esp" : : "i"(KOFFSET));
 #endif
 
-	set_bp();
 	/* Jump to init_cond() to continue initialization. */
 	asm volatile("jmp *%0" : : "r"(init_cond));
 
@@ -73,6 +72,8 @@ void init_cond() {
 	 * the serial port is available in NEMU.
 	 */
 	Log("Hello, NEMU world!");
+	
+	set_bp();
 
 #if defined(IA32_PAGE) && defined(HAS_DEVICE)
 	/* Write some test data to the video memory. */
